@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  require 'rounding'
   has_many :attendances, dependent: :destroy
   # 「remember_token」という仮想の属性を作成します。
   attr_accessor :remember_token
@@ -37,7 +38,7 @@ class User < ApplicationRecord
     self.remember_token = User.new_token
     update_attribute(:remember_digest, User.digest(remember_token))
   end
-  
+
   # トークンがダイジェストと一致すればtrueを返します。
   def authenticated?(remember_token)
     # ダイジェストが存在しない場合はfalseを返して終了します。
@@ -45,8 +46,15 @@ class User < ApplicationRecord
     BCrypt::Password.new(remember_digest).is_password?(remember_token)
   end
   
-  # ユーザーのログイン情報を破棄します。
+   # ユーザーのログイン情報を破棄します。
   def forget
     update_attribute(:remember_digest, nil)
   end
+  
+   # 部分一致検索用のスコープ
+   scope :get_by_name, ->(name) {
+   where("name like ?", "%#{name}%")
+   }
+  
 end
+
