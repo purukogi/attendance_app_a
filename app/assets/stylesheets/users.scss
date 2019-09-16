@@ -43,6 +43,7 @@
   margin-top: 10px;
 }
 
+
 /* ユーザー一覧ページ */
 
 #table-users {
@@ -51,13 +52,16 @@
   }  
 }
 
-/* 基本情報編集モーダルウインドウ */
-
-.label-basic-info {
-  margin-top: 5px;
+.btn-info {
+  margin-left:20px;
+  margin-right:20px;
+  background-color:#337AB7;
+  border-color:#2e6da4;
+  
 }
 
-.btn-basic-info {
-  margin: 15px 0;
-  width: 30%;
+
+.table-margin{
+  margin-top:10px;
 }
+
