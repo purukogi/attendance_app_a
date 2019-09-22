@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   # 拠点
   
   get 'bases', to: 'bases#index'
+ 
   
   #リソース
   resources :users do
