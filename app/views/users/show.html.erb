@@ -28,9 +28,9 @@
 </div>
 
 <div class="btn-users-show">
-  <%= link_to "勤怠を編集", attendances_edit_one_month_user_path(date: @first_day), class: "btn btn-success" %>
-  <%= link_to "CSV出力", attendances_edit_one_month_user_path(date: @first_day), class: "btn btn-success" %><br>
-  <p style="margin:5px 0;"><%= link_to "勤怠修正ログ（承認済）", attendances_edit_one_month_user_path(date: @first_day), class: "btn btn-success" %></p>
+  <%= link_to "勤怠を編集", attendances_edit_one_month_user_path(date: @first_day), class: "btn btn-primary" %>
+  <%= link_to "CSV出力", attendances_edit_one_month_user_path(date: @first_day), class: "btn btn-primary" %><br>
+  <p style="margin:5px 0;"><%= link_to "勤怠修正ログ（承認済）", attendances_edit_one_month_user_path(date: @first_day), class: "btn btn-primary" %></p>
 </div>
 
 <div>
@@ -73,7 +73,7 @@
     <tbody>
       <% @attendances.each do |day| %>
         <tr>
-          <td><%= link_to "残業申請", attendances_edit_one_month_user_path(date: @first_day), class: "btn btn-success" %></td>
+          <td><%= link_to "残業申請", attendances_edit_one_month_user_path(date: @first_day), class: "btn btn-primary" %></td>
           <td><%= l(day.worked_on, format: :short) %></td><!-- 日付 -->
           <td>
             <% if day.worked_on.wday == 0 %>
@@ -134,7 +134,7 @@
         <td rowspan="2"></td>
         <td rowspan="2"></td>
         <td rowspan="2"></td>
-        <td rowspan="2"><p>所属長承認 未<br>所属長承認 上長Aへ申請中</p><%= link_to "申請", attendances_edit_one_month_user_path(date: @first_day), class: "btn btn-success" %></td>
+        <td rowspan="2"><p>所属長承認 未<br>所属長承認 上長Aへ申請中</p><%= link_to "申請", attendances_edit_one_month_user_path(date: @first_day), class: "btn btn-primary" %></td>
       </tr>
       <tr>
         <td colspan="2"><%= @attendances.count %></td>

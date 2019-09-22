@@ -41,8 +41,6 @@ class UsersController < ApplicationController
     end
   end
 
-  
-
   def update
     if @user.update_attributes(user_params)
       flash[:success] = "ユーザー情報を更新しました。"
@@ -76,6 +74,9 @@ class UsersController < ApplicationController
       flash[:success] = "全ユーザーの基本情報を更新しました。"  
     end
     redirect_to users_url
+  end
+  
+  def working_employee_list
   end
   
     

@@ -23,3 +23,8 @@ ja:
           user: ユーザーID
           basename: 拠点名
           basetype: 拠点種類
+        session:
+          id: ID
+          name: 名前
+          email: メールアドレス
+          

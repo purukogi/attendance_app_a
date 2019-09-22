@@ -9,8 +9,10 @@ Rails.application.routes.draw do
   post   '/login', to: 'sessions#create'
   delete '/logout', to: 'sessions#destroy'
   
-  # 拠点
+  # 出勤社員一覧
+  get 'working_employee_list', to: 'users#working_employee_list'
   
+  # 拠点
   get 'bases', to: 'bases#index'
  
   
