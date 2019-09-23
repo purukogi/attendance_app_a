@@ -9,12 +9,14 @@
 
 <div class="name_form"> 
 <%= form_with model: User.new, method: :get, local: true do |form| %>
-<%= form.label "ユーザー名検索" %><br>
+
 <%= form.text_field :name, value: (params[:user][:name] if params[:user]), placeholder: "キーワードを入力…" %>
 <%= form.submit "検索", {class: "search_name"} %>
 <% end %>
 
 </div>
+
+<h4 class="index-example">Example</h4>
 
 
 <div class="col-md-10 col-md-offset-1">
@@ -22,32 +24,35 @@
   
 
   
-  <table class="table table-condensed table-hover" id="table-users">
+  <table class="table table-condensed" id="table-users">
     <thead>
-      <tr>
-        <th><%= User.human_attribute_name :name %></th>
+      <tr style="border-top:1px;">
+        <th></th>
       </tr>
     </thead>
 
     <% @users.each do |user| %>
       <tr>
-        <td>
+        <td style="border-top:0px;">
           <% if current_user.admin? %>
             <%= link_to user.name, user %>
           <% else %>
             <%= user.name %>
           <% end %>
         </td>
-    　　<td class="center">
+      </tr>
+      
+      <tr>
+    　　<td class="left" style="border-top:0px;">
           <% if current_user.admin? && !current_user?(user) %>
             
-            |<%= link_to "削除", user, method: :delete,
+            | <%= link_to "削除", user, method: :delete,
                 data: { confirm: "削除してよろしいですか？" }, class: "btn btn-primary" %>
           <% end %>
         </td>
-       
-        
       </tr>
+      
+ 
     <% end %>
   </table>
   
