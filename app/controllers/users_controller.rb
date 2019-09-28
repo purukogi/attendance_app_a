@@ -10,6 +10,11 @@ class UsersController < ApplicationController
     @users = query.order(:id).page(params[:page])
   end
   
+  def import
+    # fileはtmpに自動で一時保存される
+    User.import(params[:file])
+    redirect_to users_url
+  end
   
 
   def show

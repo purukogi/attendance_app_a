@@ -1,60 +1,47 @@
 <% provide(:title, 'All Users') %>
-<h1>
-  <% if params[:user].present? && params[:user][:name] %>
-  検索結果
-  <% else %>
-  ユーザー一覧
-  <% end %>
-  </h1>
+<h1>ユーザー一覧</h1>
 
-<div class="name_form"> 
-<%= form_with model: User.new, method: :get, local: true do |form| %>
 
-<%= form.text_field :name, value: (params[:user][:name] if params[:user]), placeholder: "キーワードを入力…" %>
-<%= form.submit "検索", {class: "search_name"} %>
-<% end %>
 
-</div>
 
-<h4 class="index-example">Example</h4>
 
 
 <div class="col-md-10 col-md-offset-1">
   
-  
+<div class="name_form"> 
+<%= form_tag import_users_path, multipart: true do %>
+  <%= file_field_tag :file, class: "btn-file" %>
+  <%= submit_tag "CSVをインポート", class: "btn btn-primary csv" %>
+<% end %>
+</div>
+ 
+ <h4 class="index-example">Example</h4> 
 
-  
-  <table class="table table-condensed" id="table-users">
-    <thead>
-      <tr style="border-top:1px;">
-        <th></th>
-      </tr>
-    </thead>
 
     <% @users.each do |user| %>
-      <tr>
-        <td style="border-top:0px;">
+      <div>
+        <ul>
+        <li>
           <% if current_user.admin? %>
             <%= link_to user.name, user %>
           <% else %>
             <%= user.name %>
           <% end %>
-        </td>
-      </tr>
+        </li>
+        
       
-      <tr>
-    　　<td class="left" style="border-top:0px;">
+      　<li>
           <% if current_user.admin? && !current_user?(user) %>
             
             | <%= link_to "削除", user, method: :delete,
                 data: { confirm: "削除してよろしいですか？" }, class: "btn btn-primary" %>
           <% end %>
-        </td>
-      </tr>
+        </li>
+        </ul>
+      </div>
       
- 
     <% end %>
-  </table>
+  
   
  
   
