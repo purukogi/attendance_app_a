@@ -7,17 +7,14 @@
   <div class="col-md-6 col-md-offset-3">
     <%= form_with(model: @user, url: update_basic_info_user_path(@user), local: true, method: :patch) do |f| %>
     <%= render 'shared/error_messages', object: @user %>
-    
  
     <%= f.label :basic_work_time, class: "label-#{yield(:class_text)}" %>
     <%= f.time_field :basic_work_time, class: "form-control" %>
 
     <div class="center">
       <%= f.submit yield(:button_text), class: "btn btn-primary btn-block btn-login" %>
-    
     </div>
 
     <% end %>
- 
   </div>
 </div>

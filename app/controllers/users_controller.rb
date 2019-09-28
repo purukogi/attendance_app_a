@@ -82,6 +82,16 @@ class UsersController < ApplicationController
     redirect_to users_url
   end
   
+  def update_user_info
+    @user = User.find(params[:id])
+    if @user.update_attributes(user_params)
+      flash[:success] = "アカウント情報を更新しました。"
+      redirect_to users_url
+    else
+      redirect_to users_url   
+    end
+  end
+  
   def working_employee_list
   end
   
