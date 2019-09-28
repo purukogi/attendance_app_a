@@ -31,6 +31,7 @@
             <% end %>
           </li>
           <li>
+            <% if current_user.admin? && !current_user?(user) %>
             <div class="panel-group">
                 <div class="panel panel-default">
                   <div class="panel-heading">
@@ -43,7 +44,7 @@
                     <div class="panel-body">
                       <div class="row">  
                         <div class="col-md-12">
-                          <%= render "user" %>
+                          <%= render "user",{user: user} %>
                         </div>
                       </div>
                     </div>
@@ -51,6 +52,7 @@
                 </div>
               </div>  
             </div>
+            <% end %>
             
             
           </li>
