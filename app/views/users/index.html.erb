@@ -1,8 +1,6 @@
 <% provide(:title, 'All Users') %>
+<% provide(:button_text, '編集する') %>
 <h1>ユーザー一覧</h1>
-
-
-
 
 
 
@@ -15,30 +13,50 @@
 <% end %>
 </div>
  
- <h4 class="index-example">Example</h4> 
+<h4 class="index-example">Example</h4> 
 
 
     <% @users.each do |user| %>
-      <div>
+      <div class="user_list">
         <ul>
-        <li>
-          <% if current_user.admin? %>
-            <%= link_to user.name, user %>
-          <% else %>
-            <%= user.name %>
-          <% end %>
-        </li>
-        
-      
-      　<li>
-          <% if current_user.admin? && !current_user?(user) %>
-            
+          <li>
+            <% if current_user.admin? && !current_user?(user) %>
+              <%= user.name %>
+            <% end %>
+          </li>
+          <li>
+            <% if current_user.admin? && !current_user?(user) %>
             | <%= link_to "削除", user, method: :delete,
-                data: { confirm: "削除してよろしいですか？" }, class: "btn btn-primary" %>
-          <% end %>
-        </li>
+                data: { confirm: "削除してよろしいですか？" }, class: "btn btn-primary delete" %>
+            <% end %>
+          </li>
+          <li>
+            <div class="panel-group">
+                <div class="panel panel-default">
+                  <div class="panel-heading">
+                    <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse<%= user.id %>" class="btn btn-primary">編集</a>
+                    </h4>
+                  </div>
+                  
+                  <div id= "collapse<%=user.id %>" class="panel-collapse collapse">
+                    <div class="panel-body">
+                      <div class="row">  
+                        <div class="col-md-12">
+                          <%= render "user" %>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>  
+            </div>
+            
+            
+          </li>
         </ul>
-      </div>
+        
+        
       
     <% end %>
   
