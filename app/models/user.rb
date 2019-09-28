@@ -13,7 +13,7 @@ class User < ApplicationRecord
                     uniqueness: true
   validates :affiliation, length: { in: 2..50 }, allow_blank: true
   validates :basic_work_time, presence: true
-  validates :work_time, presence: true
+  validates :designated_work_start_time, presence: true
   has_secure_password
   validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
 

@@ -87,7 +87,7 @@ class UsersController < ApplicationController
     end
 
     def works_params
-      params.require(:user).permit(:id, :basic_work_time, :work_time)
+      params.require(:user).permit(:id, :basic_work_time, :designated_work_start_time)
     end
     
     def query
