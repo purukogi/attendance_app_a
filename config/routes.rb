@@ -14,6 +14,9 @@ Rails.application.routes.draw do
   
   # 拠点
   get 'bases', to: 'bases#index'
+  get 'edit_base_info', to: 'bases#edit_base_info'
+  patch 'bases/update_base_info'
+ 
  
   
   #リソース
