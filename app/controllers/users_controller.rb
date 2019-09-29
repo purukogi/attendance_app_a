@@ -99,7 +99,7 @@ class UsersController < ApplicationController
   private # strongparameterの設定
 
     def user_params
-      params.require(:user).permit(:name, :email, :affiliation, :password, :password_confirmation)
+      params.require(:user).permit(:name, :email, :affiliation, :employee_number, :uid, :password, :password_confirmation, :basic_work_time, :designated_work_start_time , :designated_work_end_time)
     end
 
     def works_params
