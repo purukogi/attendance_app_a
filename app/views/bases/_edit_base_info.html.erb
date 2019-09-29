@@ -1,5 +1,5 @@
 <% provide(:class_text, 'base-info') %>
-<% provide(:button_text, '更新') %>
+<% provide(:button_text, '追加する') %>
 
 <div class="modal-dialog modal-lg modal-dialog-center">
   <div class="modal-content">
@@ -14,14 +14,19 @@
         <div class="col-md-6 col-md-offset-3">
           <%= form_with(model: @base, url: bases_update_base_info_path(@base), local: true, method: :patch) do |f| %>
             
-
-            <%= f.label :basename, class: "label-#{yield(:class_text)}" %>
+            <%= f.label :basenumber, "拠点番号" ,class: "label-#{yield(:class_text)}" %>
+            <%= f.number_field :basenumber, class: "form-control" %>
+            
+            <%= f.label :basename, "拠点名" ,class: "label-#{yield(:class_text)}" %>
             <%= f.text_field :basename, class: "form-control" %>
+            
+            <%= f.label :basetype, "拠点種類" ,class: "label-#{yield(:class_text)}" %>
+            <%= f.text_field :basetype, class: "form-control" %>
 
             <div class="center">
               <%= f.submit yield(:button_text), class: "btn btn-primary btn-#{yield(:class_text)}" %>
               <button type="button" class="btn btn-default btn-<%= yield(:class_text) %>" data-dismiss="modal">
-                キャンセル
+                閉じる
               </button>
             </div>
           <% end %>
