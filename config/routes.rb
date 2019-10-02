@@ -15,6 +15,8 @@ Rails.application.routes.draw do
   # 拠点
   get 'bases', to: 'bases#index'
   get 'edit_base_info', to: 'bases#edit_base_info'
+  get '/new', to: 'bases#new'
+  post   '/new', to: 'bases#create'
   patch 'bases/update_base_info'
  
  

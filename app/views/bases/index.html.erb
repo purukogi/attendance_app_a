@@ -1,14 +1,29 @@
 <h1>拠点情報一覧</h1>
 
 <table class="table table-bordered table-condensed user-table">
-    
-<tr>
-<td></td>
-<td></td>
-<td><b>拠点番号</b></td>
-<td><b>拠点名</b></td>
-<td><b>拠点種類</b></td>
-</tr>
+  
+  
+  <thead>
+    <tr>
+    <td></td>
+    <td></td>
+    <td><b>拠点番号</b></td>
+    <td><b>拠点名</b></td>
+    <td><b>拠点種類</b></td>
+    </tr>
+  </thead>
+  
+  <tbody>
+    <% @bases.each do |base| %>   
+    <tr>
+    <td></td>
+    <td></td>
+    <td><%= base.basenumber %></td>
+    <td><%= base.basename %></td>
+    <td><%= base.basetype %></td>
+    </tr>
+    <% end %>
+  </tbody>
 
 
 </table>
