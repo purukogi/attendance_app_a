@@ -1,6 +1,7 @@
 class BasesController < ApplicationController
 before_action :admin_user, only: [:destroy, :edit_base_info, :update_base_info]
 
+
   def index
     @bases = Base.all
   end
@@ -23,6 +24,13 @@ before_action :admin_user, only: [:destroy, :edit_base_info, :update_base_info]
     end
   end
   
+   def destroy # 拠点を削除する際の処理
+    @base = Base.find(3)
+    @base.destroy
+    flash[:success] = "#拠点{@base.name}のデータを削除しました。"
+    redirect_to bases_url
+   end
+  
   
   def update_base_info
     @base.update_attributes(base_params)
@@ -31,6 +39,6 @@ before_action :admin_user, only: [:destroy, :edit_base_info, :update_base_info]
   private # strongparameterの設定
 
     def base_params
-      params.require(:base).permit(:basenumber,:basename, :basetype)
+      params.require(:base).permit(:basenumber, :basename, :basetype)
     end
 end
