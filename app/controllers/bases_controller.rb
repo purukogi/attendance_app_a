@@ -1,13 +1,12 @@
 class BasesController < ApplicationController
-before_action :admin_user, only: [:destroy, :edit_base_info, :update_base_info]
+before_action :admin_user, only: [:destroy, :base_info, :edit_base_info, :update_base_info]
 
 
   def index
     @bases = Base.all
   end
   
-  def edit_base_info
-    
+  def base_info
   end
   
   def new
@@ -31,6 +30,8 @@ before_action :admin_user, only: [:destroy, :edit_base_info, :update_base_info]
     redirect_to bases_url
    end
   
+  def edit_base_info
+  end
   
   def update_base_info
     @base.update_attributes(base_params)
