@@ -31,6 +31,7 @@ before_action :admin_user, only: [:destroy, :base_info, :edit_base_info, :update
    end
   
   def edit_base_info
+    @base = Base.find(params[:id])
   end
   
   def update_base_info

@@ -18,7 +18,7 @@
     <tr>
     <td>
       <% if current_user.admin? %>
-        <%= link_to "修正", edit_base_info_path, remote: true, class: "btn btn-primary" %>
+        <%= link_to "修正", edit_base_info_path(id: base.id), remote: true, class: "btn btn-primary" %>
       <% end %>
     </td>
     <td>
