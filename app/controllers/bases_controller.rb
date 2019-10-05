@@ -25,9 +25,9 @@ before_action :admin_user, only: [:destroy, :edit_base_info, :update_base_info]
   end
   
    def destroy # 拠点を削除する際の処理
-    @base = Base.find(3)
+    @base = Base.find(params[:id])
     @base.destroy
-    flash[:success] = "#拠点{@base.name}のデータを削除しました。"
+    flash[:success] = "#拠点{@base.basename}のデータを削除しました。"
     redirect_to bases_url
    end
   
