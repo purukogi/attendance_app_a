@@ -26,7 +26,7 @@ before_action :admin_user, only: [:destroy, :base_info, :edit_base_info, :update
    def destroy # 拠点を削除する際の処理
     @base = Base.find(params[:id])
     @base.destroy
-    flash[:success] = "#拠点{@base.basename}のデータを削除しました。"
+    flash[:success] = "#拠点データを削除しました。"
     redirect_to bases_url
    end
   
@@ -36,7 +36,10 @@ before_action :admin_user, only: [:destroy, :base_info, :edit_base_info, :update
   
   def update_base_info
     @base = Base.find(params[:id])
-    @base.update_attributes(base_params)
+    if @base.update_attributes(base_params)
+      flash[:success] = '拠点データを修正しました。'
+      redirect_to bases_url
+    end
   end
   
   private # strongparameterの設定

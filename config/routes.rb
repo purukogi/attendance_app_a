@@ -19,7 +19,7 @@ Rails.application.routes.draw do
   get '/new', to: 'bases#new'
   post   '/new', to: 'bases#create'
   delete '/destroy', to: 'bases#destroy'
-  patch 'update_base_info', to: 'bases#update_base_info'
+  patch '/update_base_info', to: 'bases#update_base_info'
  
  
   
