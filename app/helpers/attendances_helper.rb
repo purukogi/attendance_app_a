@@ -41,5 +41,8 @@ module AttendancesHelper
     return attendances
   end
   
+  def user_attendances_month_date
+    @user.attendances.where('worked_on >= ? and worked_on <= ?', @first_day, @last_day).order('worked_on')
+  end
 end
 
