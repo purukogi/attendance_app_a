@@ -96,6 +96,9 @@ class UsersController < ApplicationController
     @users = User.all.includes(:attendances)
   end
   
+  def attendances_edit_log
+  end
+  
     
   private # strongparameterの設定
 
