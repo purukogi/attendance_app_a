@@ -99,6 +99,9 @@ class UsersController < ApplicationController
   def attendances_edit_log
   end
   
+  def edit_overwork_request
+  end
+  
     
   private # strongparameterの設定
 
