@@ -100,6 +100,7 @@ class UsersController < ApplicationController
   end
   
   def edit_overwork_request
+    @day = Date.parse(params[:day])
   end
   
     
