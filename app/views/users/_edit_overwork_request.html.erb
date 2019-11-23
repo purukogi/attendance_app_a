@@ -2,29 +2,33 @@
 
 <div class="modal-dialog modal-lg modal-dialog-center">
   <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
         <span aria-hidden="true">&times;</span>
-        </button>
-        <h4 class="modal-title">【残業申請】</h4>
-      </div>
-      <div class="modal-body">
-        <table class="table table-bordered table-striped table-overwork">
-          <thead>
+      </button>
+      <h4 class="modal-title">【残業申請】</h4>
+    </div>
+      
+    <div class="modal-body">
+      <%= form_with(model: @user, local: true, method: :patch) do |f| %>
+        
+      <table class="table table-bordered table-striped table-overwork">
+        <thead>
           <tr>
-           <th>日付</th>
-           <th>曜日</th>
-           <th>終了予定時間</th>
-           <th>翌日</th>
-           <th>業務処理内容</th>
-           <th>指示者確認㊞</th>
-         </tr>
-         </thead>
-       <tbody>
-         
-         <tr>
-          <td class="table-overwork"><%= @day %></td>
-          <td>
+            <th>日付</th>
+            <th>曜日</th>
+            <th>終了予定時間</th>
+            <th>翌日</th>
+            <th>業務処理内容</th>
+            <th>指示者確認㊞</th>
+          </tr>
+        </thead>
+        
+        <tbody>
+        
+          <tr>
+            <td class="table-overwork"><%= @day %></td>
+            <td>
             <% if @day.wday == 0 %>
               <font color="red">日</font>
             <% elsif @day.wday == 1 %>
@@ -40,21 +44,22 @@
             <% elsif @day.wday == 6 %>
               <font color="blue">土</font>
             <% end %>
-          </td>
-          <td></td>
-          <td>
-              <%= check_box_tag :check %>
-          </td>
-          <td></td>
-          <td></td>
-         </tr>
-         
-       </tbody>
-       </table>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-primary btn-block">残業を申請する</button>
-      </div>
+            </td>
+            <td><%= f.time_field :scheduled_end_time, class: "form-control" %></td>
+            <td><%= check_box_tag :check %></td>
+            <td><%= f.text_field :work_descripition, class: "form-control" %></td>
+            <td><%= f.select :superior, [["superior", "superior"],["管理者", "管理者"]],:include_blank => true ,class:"form-control" %></td>
+          </tr>
+          
+        </tbody>
+      </table>
+    </div>
+    
+    <div class="modal-footer">
+      <%= f.submit "残業を申請する", class: "btn btn-primary" %>
+    </div>
+    <% end %>
+    
   </div>
 </div>
 
