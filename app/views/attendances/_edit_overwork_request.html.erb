@@ -1,5 +1,7 @@
 <% provide(:button_text, '追加する') %>
 
+<% require 'byebug' %>
+
 <div class="modal-dialog modal-lg modal-dialog-center">
   <div class="modal-content">
     <div class="modal-header">
@@ -8,10 +10,9 @@
       </button>
       <h4 class="modal-title">【残業申請】</h4>
     </div>
-     
+      
     <div class="modal-body">
-      <%= form_with(Model: @attendance, url: attendances_update_overwork_request_user_path, method: :post) do |f| %>
-     <% debugger %>
+      <%= form_with(model: @user, url: update_overwork_request_user_path, local: true, method: :post) do |f| %>
       <table class="table table-bordered table-striped table-overwork">
         <thead>
           <tr>
@@ -28,23 +29,7 @@
         
           <tr>
             <td class="table-overwork"><%= @day %></td>
-            <td>
-            <% if @day.wday == 0 %>
-              <font color="red">日</font>
-            <% elsif @day.wday == 1 %>
-              <font color="black">月</font>
-            <% elsif @day.wday == 2 %>
-              <font color="black">火</font>
-            <% elsif @day.wday == 3 %>
-              <font color="black">水</font> 
-            <% elsif @day.wday == 4 %>
-              <font color="black">木</font> 
-            <% elsif @day.wday == 5 %>
-              <font color="black">金</font>  
-            <% elsif @day.wday == 6 %>
-              <font color="blue">土</font>
-            <% end %>
-            </td>
+            <td></td>
             <td><%= f.time_field :scheduled_end_time, class: "form-control" %></td>
             <td><%= check_box_tag :check %></td>
             <td></td>
@@ -57,8 +42,8 @@
     
     <div class="modal-footer">
       <%= f.submit "残業を申請する", class: "btn btn-primary" %>
-    <% end %> 
     </div>
+    <% end %>
     
   </div>
 </div>

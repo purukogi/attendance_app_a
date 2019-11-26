@@ -101,17 +101,7 @@ class UsersController < ApplicationController
   
   def edit_overwork_request
     @day = Date.parse(params[:day])
-  end
-  
-  def update_overwork_request
-    @user = Attendance.find(params[:id])
-    
-    if @user.update_attributes(overwork_request_params)
-      flash[:success] = "残業申請しました"
-    else
-      flash[:danger] = "#{@user.name}の更新は失敗しました。" + @user.errors.full_messages.join("、")
-    end
-      redirect_to users_url  
+    @user = User.find(params[:id])
   end
   
     

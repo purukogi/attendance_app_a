@@ -48,11 +48,23 @@ class AttendancesController < ApplicationController
     end
   end
   
+  
+  def update_overwork_request
+    @attendance = @user.attendances.find(params[:attendance][:id])
+    if @attendance.update_attributes(overwork_request_params)
+    redirect_to users_url
+    end
+  end
+  
   private
 
     # 1ヶ月分の勤怠情報を扱います。
     def attendances_params
       params.require(:user).permit(attendances: [:started_at, :finished_at, :note])[:attendances]
+    end
+    
+    def overwork_request_params
+      params.require(:attendance).permit(:id, :user_id, :scheduled_end_time)
     end
 
     # beforeフィルター
