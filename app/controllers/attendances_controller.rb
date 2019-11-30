@@ -50,9 +50,9 @@ class AttendancesController < ApplicationController
   
   
   def update_overwork_request
-    @attendance.update_attributes(overwork_request_params)
+    @attendance.update_attributes(overtime_params)
     flash[:info] = "残業申請を送信しました。"
-    redirect_to users_url
+    redirect_to @user and return
   end
   
   private
@@ -63,7 +63,7 @@ class AttendancesController < ApplicationController
     end
     
     def overwork_request_params
-      params.require(:attendance).permit(:id, :user_id, :scheduled_end_time)
+      params.require(:attendance).permit(:user_id, :scheduled_end_time)
     end
 
     # beforeフィルター
