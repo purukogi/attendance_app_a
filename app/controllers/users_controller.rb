@@ -100,8 +100,8 @@ class UsersController < ApplicationController
   end
   
   def edit_overwork_request
-    @user = User.find(params[:id])
-    @attendance = Attendance.find_by(params[:day])
+   @attendance = Attendance.find(params[:id])
+   @user = User.find(@attendance.user_id)
   end
   
     

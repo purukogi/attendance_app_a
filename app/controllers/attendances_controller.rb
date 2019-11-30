@@ -50,9 +50,9 @@ class AttendancesController < ApplicationController
   
   
   def update_overwork_request
-    if @attendance.update_attributes(overwork_request_params)
+    @attendance.update_attributes(overwork_request_params)
+    flash[:info] = "残業申請を送信しました。"
     redirect_to users_url
-    end
   end
   
   private
