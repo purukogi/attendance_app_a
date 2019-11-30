@@ -50,8 +50,7 @@ class AttendancesController < ApplicationController
   
   
   def update_overwork_request
-    @attendance = @user.attendances.find(params[:attendance][:id])
-    if @attendance.update_attributes(overwork_request_params)
+    if @user.update_attributes(overwork_request_params)
     redirect_to users_url
     end
   end
