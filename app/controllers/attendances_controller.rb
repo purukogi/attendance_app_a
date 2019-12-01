@@ -59,7 +59,7 @@ class AttendancesController < ApplicationController
     @attendance.update_attributes(overwork_request_params)
     debugger
     flash[:info] = "残業申請を送信しました。"
-    redirect_to users_url
+    redirect_to @user and return
   end
   
   private
