@@ -99,12 +99,6 @@ class UsersController < ApplicationController
   def attendances_edit_log
   end
   
-  def edit_overwork_request
-   @attendance = Attendance.find(params[:id])
-   @user = User.find(@attendance.user_id)
-  end
-  
-    
   private # strongparameterの設定
 
     def user_params

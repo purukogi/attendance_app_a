@@ -1,7 +1,5 @@
 <% provide(:button_text, '追加する') %>
 
-<% require 'byebug' %>
-
 <div class="modal-dialog modal-lg modal-dialog-center">
   <div class="modal-content">
     <div class="modal-header">
@@ -10,44 +8,42 @@
       </button>
       <h4 class="modal-title">【残業申請】</h4>
     </div>
-      
+     
     <div class="modal-body">
-      <%= form_with(model: @user, url: update_overwork_request_user_path, local: true, method: :post) do |f| %>
-      <table class="table table-bordered table-striped table-overwork">
-        <thead>
-          <tr>
-            <th>日付</th>
-            <th>曜日</th>
-            <th>終了予定時間</th>
-            <th>翌日</th>
-            <th>業務処理内容</th>
-            <th>指示者確認㊞</th>
-          </tr>
-        </thead>
+      <%= form_with(model: @user, url: attendances_update_overwork_request_user_path, local: true, method: :patch) do |f| %>
         
-        <tbody>
+          <table class="table table-bordered table-striped table-overwork">
+            <thead>
+              <tr>
+                <th>日付</th>
+                <th>曜日</th>
+                <th>終了予定時間</th>
+                <th>翌日</th>
+                <th>業務処理内容</th>
+                <th>指示者確認㊞</th>
+              </tr>
+            </thead>
         
-          <tr>
-            <td class="table-overwork"><%= @day %></td>
-            <td></td>
-            <td><%= f.time_field :scheduled_end_time, class: "form-control" %></td>
-            <td><%= check_box_tag :check %></td>
-            <td></td>
-            <td></td>
-          </tr>
-          
-        </tbody>
-      </table>
+            <tbody>
+              
+                
+                  <tr>
+                  <td class="table-overwork"><%= @attendance.worked_on %></td>
+                  <td><%= $days_of_the_week[@attendance.worked_on.wday] %></td>
+                  <td><%= f.time_field :scheduled_end_time, class: "form-control" %></td>
+                  <td><%= check_box_tag :check %></td>
+                  <td></td>
+                  <td></td>
+                  </tr>
+              
+            
+            </tbody>
+          </table>
     </div>
     
     <div class="modal-footer">
       <%= f.submit "残業を申請する", class: "btn btn-primary" %>
+      <% end %>
     </div>
-    <% end %>
-    
   </div>
 </div>
-
-
-
-

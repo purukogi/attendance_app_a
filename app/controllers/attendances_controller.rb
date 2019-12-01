@@ -48,9 +48,16 @@ class AttendancesController < ApplicationController
     end
   end
   
+  def edit_overwork_request
+   @attendance = Attendance.find(params[:id])
+   @user = User.find(@attendance.user_id)
+   $days_of_the_week = %w{日 月 火 水 木 金 土}
+  end
   
   def update_overwork_request
+    @user = User.find(params[:id])
     @attendance.update_attributes(overwork_request_params)
+    debugger
     flash[:info] = "残業申請を送信しました。"
     redirect_to users_url
   end
@@ -63,7 +70,7 @@ class AttendancesController < ApplicationController
     end
     
     def overwork_request_params
-      params.require(:attendance).permit(:id, :user_id, :scheduled_end_time)
+      params.require(:attendance).permit(:user_id, :scheduled_end_time)
     end
 
     # beforeフィルター
