@@ -10,8 +10,7 @@
     </div>
      
     <div class="modal-body">
-      <%= form_with(model: @user, url: attendances_update_overwork_request_user_path, local: true, method: :patch) do |f| %>
-        
+      <%= form_with(model: @user, url: attendances_update_overwork_request_user_path, method: :patch) do |f| %>
           <table class="table table-bordered table-striped table-overwork">
             <thead>
               <tr>
@@ -26,17 +25,17 @@
         
             <tbody>
               
-                
-                  <tr>
-                  <td class="table-overwork"><%= @attendance.worked_on %></td>
-                  <td><%= $days_of_the_week[@attendance.worked_on.wday] %></td>
-                  <td><%= f.time_field :scheduled_end_time, class: "form-control" %></td>
-                  <td><%= check_box_tag :check %></td>
-                  <td></td>
-                  <td></td>
-                  </tr>
+              <tr>
+                <td class="table-overwork"><%= @attendance.worked_on %></td>
+                <td><%= $days_of_the_week[@attendance.worked_on.wday] %></td>
+                <%= f.fields_for :attendance do |af| %>
+                  <td><%= af.time_field :scheduled_end_time, class: "form-control" %></td>
+                <% end %>
+                <td><%= check_box_tag :check %></td>
+                <td></td>
+                <td></td>
+              </tr>
               
-            
             </tbody>
           </table>
     </div>
