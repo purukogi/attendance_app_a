@@ -50,13 +50,12 @@ class AttendancesController < ApplicationController
   
   def edit_overwork_request
    @attendance = Attendance.find(params[:id])
-   @attendances = Attendance.find(params[:id])
    @user = User.find(@attendance.user_id)
-   $days_of_the_week = %w{日 月 火 水 木 金 土}
+   @youbi = %w{日 月 火 水 木 金 土}
   end
   
   def update_overwork_request
-    debugger
+    byebug
   end
   
   private
@@ -67,7 +66,7 @@ class AttendancesController < ApplicationController
     end
     
     def overwork_request_params
-      params.require(:user).permit(attendances: [:user_id, :scheduled_end_time])[:attendances]
+      params.require(:attendance).permit(:user_id, :scheduled_end_time)
     end
 
     # beforeフィルター

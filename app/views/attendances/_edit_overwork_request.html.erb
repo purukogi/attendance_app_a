@@ -27,8 +27,8 @@
               
               <tr>
                 <td class="table-overwork"><%= @attendance.worked_on %></td>
-                <td><%= $days_of_the_week[@attendance.worked_on.wday] %></td>
-                <%= f.fields_for :attendance do |af| %>
+                <td><%= @youbi[@attendance.worked_on.wday] %></td>
+                <%= f.fields_for :attendances, @user.attendances.build do |af| %>
                   <td><%= af.time_field :scheduled_end_time, class: "form-control" %></td>
                 <% end %>
                 <td><%= check_box_tag :check %></td>
