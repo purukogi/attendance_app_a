@@ -55,7 +55,7 @@ class AttendancesController < ApplicationController
   end
   
   def update_overwork_request
-    byebug
+    debugger
   end
   
   private
