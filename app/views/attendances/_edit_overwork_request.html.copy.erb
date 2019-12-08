@@ -25,18 +25,18 @@
             </thead>
         
             <tbody>
-              
-                
+              <% @attendances.each do |day| %>
+                <%= f.fields_for "attendances[]", day do |attendance| %>
                 <tr>
                   <td class="table-overwork"><%= @attendance.worked_on %></td>
                   <td><%= @youbi[@attendance.worked_on.wday] %></td>
-                  <td><%= f.time_field :scheduled_end_time, class: "form-control" %></td>
+                  <td><%= attendance.time_field :scheduled_end_time, class: "form-control" %></td>
                   <td><%= check_box_tag :check %></td>
-                  <td><%= f.text_field :work_description, class: "form-control" %></td>
+                  <td><%= attendance.text_field :work_description, class: "form-control" %></td>
                   <td></td>
                 </tr>
-               
-             
+                <% end %>
+              <% end %>
             </tbody>
           </table>
     </div>
