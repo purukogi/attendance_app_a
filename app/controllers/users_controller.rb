@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update, :destroy, :edit_basic_info, :update_basic_info]
+  before_action :set_user, only: [:show, :edit, :update, :destroy, :edit_basic_info, :update_basic_info, :edit_overwork_request, :update_overwork_request]
   before_action :logged_in_user, only: [:index, :edit, :update, :destroy, :edit_basic_info, :update_basic_info]
   before_action :correct_user, only: [:edit, :update]
   before_action :admin_user, only: [:index, :destroy, :edit_basic_info, :update_basic_info]
@@ -96,6 +96,21 @@ class UsersController < ApplicationController
     @users = User.all.includes(:attendances)
   end
   
+  def edit_overwork_request
+    @day = Date.parse(params[:day])
+    @user = User.find(params[:id])
+    @youbi = %w{日 月 火 水 木 金 土}
+  end
+  
+  def update_overwork_request
+    if @user.update_attributes(test_params)
+      flash[:success] = "#{@user.name}の基本情報を更新しました。"
+    else
+      flash[:danger] = "#{@user.name}の更新は失敗しました。"
+    end
+    redirect_to @user
+  end
+  
   def attendances_edit_log
   end
   
@@ -108,6 +123,12 @@ class UsersController < ApplicationController
     def works_params
       params.require(:user).permit(:id, :basic_work_time, :designated_work_start_time , :designated_work_end_time)
     end
+    
+    def test_params
+      params.require(:user).permit(:name)
+    end
+    
+    
     
     def query
       if params[:user].present? && params[:user][:name]

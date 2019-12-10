@@ -74,7 +74,7 @@
     <tbody>
       <% @attendances.each do |day| %>
         <tr>
-          <td><%= link_to "残業申請", attendances_edit_overwork_request_user_path(day), remote: true, class: "btn btn-primary" %></td>
+          <td><%= link_to "残業申請", edit_overwork_request_user_path(@user, params:{ day: day.worked_on }), remote: true, class: "btn btn-primary" %></td>
           <td><%= l(day.worked_on, format: :short) %></td><!-- 日付 -->
           <td>
             <% if day.worked_on.wday == 0 %>

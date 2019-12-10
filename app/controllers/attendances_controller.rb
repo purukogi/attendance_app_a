@@ -47,27 +47,7 @@ class AttendancesController < ApplicationController
       redirect_to attendances_edit_one_month_user_url(date: params[:date])
     end
   end
-  
-  def edit_overwork_request
-    @attendance = Attendance.find(params[:id])
-    @user = User.find(@attendance.user_id)
-    @youbi = %w{日 月 火 水 木 金 土}
-  end
-  
-  def update_overwork_request
-    @user = User.find(params[:id])
-    if attendances_invalid?
-      overwork_request_params.each do |id, item|
-        attendance = Attendance.find(id)
-        attendance.update_attributes(item)
-      end
-      flash[:success] = "１日の残業を申請しました。"
-      redirect_to user_path(@user, params:{first_day: params[:date]})
-    else
-      flash[:danger] = "不正な時間入力がありました、再入力してください。"
-      redirect_to attendances_edit_one_month_user_url(date: params[:date])
-    end
-  end
+
   
   private
 
