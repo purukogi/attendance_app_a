@@ -55,7 +55,8 @@ class AttendancesController < ApplicationController
   end
   
   def update_overwork_request
-    if @user.update_attributes(test_params)
+    @user = User.find(params[:id])
+    if @user.update_attributes
       flash[:success] = "#{@user.name}の基本情報を更新しました。"
     else
       flash[:danger] = "#{@user.name}の更新は失敗しました。"
@@ -75,7 +76,7 @@ class AttendancesController < ApplicationController
     end
     
     def overwork_request_params
-      params.require(:user).permit(attendances: [:scheduled_end_time, :work_description])[:attendances]
+      params.require(:user).permit(:name, attendances_attributes: [:id, :scheduled_end_time, :work_description])
     end
 
     # beforeフィルター
