@@ -109,11 +109,6 @@ class UsersController < ApplicationController
       params.require(:user).permit(:id, :basic_work_time, :designated_work_start_time , :designated_work_end_time)
     end
     
-    def test_params
-      params.require(:user).permit(:name)
-    end
-    
-    
     
     def query
       if params[:user].present? && params[:user][:name]
