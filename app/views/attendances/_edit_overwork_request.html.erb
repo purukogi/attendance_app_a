@@ -15,7 +15,7 @@
           <%= form_with(model: @user, url: attendances_update_overwork_request_user_path(@user), local: true, method: :patch) do |f| %>
             <%= render 'shared/error_messages', object: @user %>
             
-            <table>
+            <table class="table table-bordered table-striped table-overwork">
               <thead>
                 <tr>
                   <td>日付</td>
@@ -29,14 +29,13 @@
               
               <tbody>
                 <tr>
-                  <td></td>
-                  <td></td>
+                  <td class="table-overwork"><%= @attendance.worked_on %></td>
+                  <td><%= @youbi[@attendance.worked_on.wday] %></td>
                   <td><%= f.text_field :name, class: "form-control" %></td>
                   <td></td>
                   <td></td>
                   <td></td>
                 </tr>
-              
               </tbody>
             </table>
 
