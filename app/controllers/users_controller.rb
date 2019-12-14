@@ -97,8 +97,8 @@ class UsersController < ApplicationController
   end
   
   def edit_overwork_request
-    @day = Date.parse(params[:day])
-    @user = User.find(params[:id])
+    @user = User.find(params[:id]) # paramsハッシュからユーザーを取得
+    @attendance = Attendance.find(params[:id])
     @youbi = %w{日 月 火 水 木 金 土}
   end
   
