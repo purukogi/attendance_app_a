@@ -16,6 +16,7 @@ gem 'turbolinks',   '~> 5'
 gem 'jbuilder',     '~> 2.5'
 gem 'rounding'
 gem 'roo'
+gem "loofah", ">= 2.3.1"
 
 group :development, :test do
   gem 'sqlite3'
