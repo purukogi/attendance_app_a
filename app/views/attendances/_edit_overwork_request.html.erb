@@ -11,7 +11,7 @@
     <div class="modal-body">
       <div class="row">
         <div class="col-md-10 col-md-offset-1">
-          <%= form_with(model: @user, url: attendances_update_overwork_request_user_path(@user), local: true, method: :patch) do |f| %>
+          <%= form_with(model: @user, url: attendances_update_overwork_request_user_path, local: true, method: :patch) do |f| %>
             <%= render 'shared/error_messages', object: @user %>
             
             <table class="table table-bordered table-striped table-overwork">
@@ -31,9 +31,9 @@
                 <tr>
                   <td><%= @attendance.worked_on %></td>
                   <td><%= @youbi[@attendance.worked_on.wday] %></td>
+                  <td></td>
+                  <td></td>
                   <td><%= af.text_field :work_description, class: "form-control" %></td>
-                  <td></td>
-                  <td></td>
                   <td></td>
                 </tr>
                 <% end %>

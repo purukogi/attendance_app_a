@@ -1,7 +1,7 @@
 class AttendancesController < ApplicationController
   
   include AttendancesHelper
-  before_action :set_user, only: [:edit_one_month, :update_one_month, :update_overwork_request]
+  before_action :set_user, only: [:edit_one_month, :update_one_month]
   before_action :logged_in_user, only: [:update, :edit_one_month, :update_one_month]
   before_action :admin_or_correct_user, only: [:edit_one_month, :update_one_month]
   before_action :set_one_month, only: :edit_one_month
@@ -55,8 +55,9 @@ class AttendancesController < ApplicationController
   end
   
   def update_overwork_request
-    @user = User.find(params[:id])
-    if @user.update_attributes
+    @attendance = Attendance.find(params[:id])
+    @user = User.find(@attendance.user_id)
+    if @user.update_attributes(overwork_request_params)
       flash[:success] = "#{@user.name}の基本情報を更新しました。"
     else
       flash[:danger] = "#{@user.name}の更新は失敗しました。"
