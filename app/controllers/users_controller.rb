@@ -96,21 +96,6 @@ class UsersController < ApplicationController
     @users = User.all.includes(:attendances)
   end
   
-  def edit_overwork_request
-    @user = User.find(params[:id]) # paramsハッシュからユーザーを取得
-    @attendance = Attendance.find(params[:id])
-    @youbi = %w{日 月 火 水 木 金 土}
-  end
-  
-  def update_overwork_request
-    if @user.update_attributes(test_params)
-      flash[:success] = "#{@user.name}の基本情報を更新しました。"
-    else
-      flash[:danger] = "#{@user.name}の更新は失敗しました。"
-    end
-    redirect_to @user
-  end
-  
   def attendances_edit_log
   end
   
