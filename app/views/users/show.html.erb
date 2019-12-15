@@ -115,7 +115,7 @@
           </td>
           <td><%= l(day.scheduled_end_time, format: :hour) if day.scheduled_end_time.present? %></td>
           <td><%= l(day.scheduled_end_time, format: :min) if day.scheduled_end_time.present? %></td>
-          <td></td>
+          <td><%= l(day.scheduled_end_time, format: :time) if day.scheduled_end_time.present? %></td><!-- 時間外時間 -->
           <td><%= day.work_description %></td>
           <td></td>
         </tr>
