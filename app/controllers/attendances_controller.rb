@@ -58,6 +58,11 @@ class AttendancesController < ApplicationController
       @attendance = Attendance.find(params[:id])
       @user = User.find(params[:user_id])
       if @attendance.update_attributes(overwork_request_params)
+          # 翌日チェックONなら終了予定時間を＋1日する
+        if @attendance.next_day.nil?
+          @attendance.update_column(:scheduled_end_time, @attendance.scheduled_end_time+1.day)
+        end
+       
         flash[:success] = "#{@user.name}の基本情報を更新しました。"
         redirect_to @user
       else
@@ -74,7 +79,7 @@ class AttendancesController < ApplicationController
     end
     
     def overwork_request_params
-      params.require(:attendance).permit(:scheduled_end_time, :work_description)
+      params.require(:attendance).permit(:scheduled_end_time, :next_day, :work_description)
     end
 
     # beforeフィルター
