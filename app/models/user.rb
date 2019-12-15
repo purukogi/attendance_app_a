@@ -3,7 +3,6 @@ class User < ApplicationRecord
   require 'rails/all'
   require 'csv'
   has_many :attendances, dependent: :destroy
-  accepts_nested_attributes_for :attendances
   # 「remember_token」という仮想の属性を作成します。
   attr_accessor :remember_token
   before_save { self.email = email.downcase }

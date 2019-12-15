@@ -50,24 +50,20 @@ class AttendancesController < ApplicationController
   
   def edit_overwork_request
     @attendance = Attendance.find(params[:id])
-    @user = User.find(@attendance.user_id)
+    @user = User.find(params[:user_id])
     @youbi = %w{日 月 火 水 木 金 土}
   end
   
   def update_overwork_request
-    if
       @attendance = Attendance.find(params[:id])
-      @user = User.find(@attendance.user_id)
-      overwork_request_params.each do |id, item|
-        attendance = Attendance.find(id)
-        attendance.update_attributes!(item)
+      @user = User.find(params[:user_id])
+      if @attendance.update_attributes(overwork_request_params)
+        flash[:success] = "#{@user.name}の基本情報を更新しました。"
+        redirect_to @user
+      else
+        flash[:danger] = "#{@user.name}の更新は失敗しました。"
+        redirect_to @user
       end
-      flash[:success] = "#{@user.name}の基本情報を更新しました。"
-      redirect_to @user
-    else
-      flash[:danger] = "#{@user.name}の更新は失敗しました。"
-      redirect_to @user
-    end
   end
   
   private
@@ -82,7 +78,7 @@ class AttendancesController < ApplicationController
     end
     
     def overwork_request_params
-      params.require(:user).permit(:name, attendances_attributes: [:scheduled_end_time, :work_description])
+      params.require(:attendance).permit(:work_description)
     end
 
     # beforeフィルター
