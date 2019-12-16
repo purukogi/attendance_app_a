@@ -117,8 +117,11 @@
           <td><%= l(day.scheduled_end_time, format: :min) if day.scheduled_end_time.present? %></td>
           <td>
             <% if day.scheduled_end_time.present? %>
-              <%= day.scheduled_end_time + 24.hour if day.next_day == true %>
-              <%= format_basic_info(day.scheduled_end_time).to_f - format_basic_info(@user.designated_work_end_time).to_f %>
+              <% if day.next_day == true %>
+                <%= format_basic_info(day.scheduled_end_time).to_f + format_basic_info(@user.designated_work_end_time - 12.hour).to_f %>
+              <% else %>
+                <%= format_basic_info(day.scheduled_end_time).to_f - format_basic_info(@user.designated_work_end_time).to_f %>
+              <% end %>
             <% end %>
           </td>
           <td><%= day.work_description %></td>
