@@ -74,7 +74,7 @@ class AttendancesController < ApplicationController
     end
     
     def overwork_request_params
-      params.require(:attendance).permit(:scheduled_end_time, :next_day, :work_description)
+      params.require(:attendance).permit(:scheduled_end_time, :next_day, :work_description, :authorizer_user_id )
     end
 
     # beforeフィルター

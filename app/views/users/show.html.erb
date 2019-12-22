@@ -125,7 +125,11 @@
             <% end %>
           </td>
           <td><%= day.work_description %></td>
-          <td></td>
+          <td>
+            <% if !day.authorizer_user_id.nil? %>
+              残業申請中
+            <% end %>
+          </td>
         </tr>
       <% end %>
     </tbody>
