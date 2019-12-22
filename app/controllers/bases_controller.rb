@@ -1,5 +1,5 @@
 class BasesController < ApplicationController
-before_action :admin_user, only: [:destroy, :base_info, :edit_base_info, :update_base_info]
+before_action :admin_user, only: [:index, :destroy, :base_info, :edit_base_info, :update_base_info]
 
 
   def index

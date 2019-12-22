@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy, :edit_basic_info, :update_basic_info, :edit_overwork_request, :update_overwork_request]
   before_action :logged_in_user, only: [:index, :edit, :update, :destroy, :edit_basic_info, :update_basic_info]
   before_action :correct_user, only: [:edit, :update]
-  before_action :admin_user, only: [:index, :destroy, :edit_basic_info, :update_basic_info]
+  before_action :admin_user, only: [:index, :destroy, :edit_basic_info, :update_basic_info, :working_employee_list]
   before_action :set_one_month, only: :show
   before_action :ensure_correct_user, only: :show
 
@@ -77,7 +77,7 @@ class UsersController < ApplicationController
       redirect_to users_url and return
     else
       User.where(:id => 1..999).update(works_params)
-      flash[:success] = "全ユーザーの基本情報を更新しました。"  
+      flash[:success] = "全ユーザーの基本情報を更新しました。"
     end
     redirect_to users_url
   end
