@@ -32,7 +32,9 @@
                   <td><%= f.time_select :scheduled_end_time, class: "form-control" %></td>
                   <td><%= f.check_box :next_day %></td>
                   <td><%= f.text_field :work_description, class: "form-control" %></td>
-                  <td><%= f.collection_select :name, User.where(superior: true), :name, :name, :include_blank => true , class:"form-control" %></td>
+                  <td>
+                    <%= f.select :authorizer_user_id, Attendance.authorizer_user_ids.keys.to_a, { include_blank: true }, class: "form-control" %>
+                  </td>
                 </tr>
               </tbody>
             </table>
