@@ -38,6 +38,8 @@
                 </tr>
               </tbody>
             </table>
+            
+            <%= f.hidden_field :application_state, {value: 'applying'} %>
 
             <div class="center">
               <%= f.submit "残業を申請する", class: "btn btn-primary btn-block" %>
