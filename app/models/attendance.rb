@@ -6,7 +6,7 @@ class Attendance < ApplicationRecord
   # 勤怠編集申請状態（0:無 1:申請中 2:承認 3:否認）
   enum application_edit_state: { nothing0: 0, applying1: 1, approval2: 2, denial3: 3 }
   # 承認者選択
-  enum authorizer_user_id: { "上長Ａ" => 1, "上長Ｂ" => 2 }
+  enum authorizer_user_id: { superiorA: 1, superiorB: 2 }
 
   validates :worked_on, presence: true
   validates :note, length: { maximum: 50 }

@@ -126,8 +126,10 @@
           </td>
           <td><%= day.work_description %></td>
           <td>
-            <% if !day.authorizer_user_id.nil? %>
-              残業申請中
+            <% if day.authorizer_user_id == "superiorA" %>
+              <%= "上長Ａに残業申請中" %>
+            <% elsif day.authorizer_user_id == "superiorB" %>
+              <%= "上長Ｂに残業申請中" %>
             <% end %>
           </td>
         </tr>
