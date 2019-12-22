@@ -19,7 +19,12 @@ class UsersController < ApplicationController
   
 
   def show
-    @worked_sum = @attendances.where.not(started_at: nil).count
+    # ログインユーザーが管理者の場合、別ページへ移動
+    if current_user.admin?
+      render :edit_basic_info
+    else
+      @worked_sum = @attendances.where.not(started_at: nil).count
+    end
   end
   
   def ensure_correct_user

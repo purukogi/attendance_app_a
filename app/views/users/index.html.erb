@@ -19,11 +19,7 @@
     <% @users.each do |user| %>
       <div class="user_list">
         <ul>
-          <li>
-            <% if current_user.admin? && !current_user?(user) %>
-              <%= user.name %>
-            <% end %>
-          </li>
+          <li><%= user.name %></li>
           <li>
             <% if current_user.admin? && !current_user?(user) %>
             | <%= link_to "削除", user, method: :delete,
@@ -31,7 +27,7 @@
             <% end %>
           </li>
           <li>
-            <% if current_user.admin? && !current_user?(user) %>
+           
             <div class="panel-group">
                 <div class="panel panel-default">
                   <div class="panel-heading">
@@ -52,14 +48,9 @@
                 </div>
               </div>  
             </div>
-            <% end %>
-            
-            
+          
           </li>
         </ul>
-        
-        
-      
     <% end %>
   
   
