@@ -25,6 +25,8 @@ class UsersController < ApplicationController
     else
       @worked_sum = @attendances.where.not(started_at: nil).count
     end
+    
+    @applications_to_me = Attendance.where(application_state: :applying)
   end
   
   def ensure_correct_user
