@@ -29,16 +29,24 @@
 
 <% if @user.superior == true %>
 <div style="height: 90px;">
-【所属長承認申請のお知らせ】<br>
-【勤怠変更申請のお知らせ】<br>
-【残業申請のお知らせ】
+   【所属長承認申請のお知らせ】<br>
+   【勤怠変更申請のお知らせ】<br>
+   <% if @applications_to_A.count >= 0 || @applications_to_B.count >= 0 %>
+     <span style="color: red;">
+     【残業申請のお知らせ】
+     </span>
 
-<% if @user.id == 2 %>
-  <%= "#{@applications_to_A.count}件の通知があります" %>
-<% elsif @user.id == 3 %>
-  <%= "#{@applications_to_B.count}件の通知があります" %>
-<% end %>
-
+    <% if @user.id == 2 %>
+      <span style="border: 2px solid red; color: red;"><%= "#{@applications_to_A.count}件の通知があります" %></span>
+    <% elsif @user.id == 3 %>
+      <span style="border: 2px solid red; color: red;"><%= "#{@applications_to_B.count}件の通知があります" %></span>
+    <% end %>
+    
+  <% elsif %>
+   【所属長承認申請のお知らせ】<br>
+   【勤怠変更申請のお知らせ】<br>
+   【残業申請のお知らせ】
+  <% end %>
 
 </div>
 <% end %>
