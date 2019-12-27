@@ -12,7 +12,10 @@
           <%= form_with(model: @attendance, url: update_overwork_approval_user_attendance_path(@user.id, @attendance.id), local: true, method: :patch) do |f| %>
             <%= render 'shared/error_messages', object: @user %>
             
+            <% @users.each do |user| %>
+           
             <table class="table table-bordered table-striped table-approval">
+              <p><%= user.name %></p>
               <thead>
                 <tr>
                   <th>日付</th>
@@ -26,20 +29,25 @@
                   <th>勤怠を確認する</th>
                 </tr>
               </thead>
+              
+            <% @attendances.each do |day| %>
               <tbody>
                 <tr>
+                  <td><%= day.worked_on %></td>
                   <td></td>
+                  <td><%= day.scheduled_end_time %></td>
                   <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
+                  <td><%= day.work_description %></td>
                   <td></td>
                   <td></td>
                   <td></td>
                   <td></td>
                 </tr>
               </tbody>
+            <% end %>
             </table>
+         
+            <% end %>
             
             <%= f.hidden_field :application_state, {value: 'applying'} %>
 

@@ -69,6 +69,8 @@ class AttendancesController < ApplicationController
   def edit_overwork_approval
     @attendance = Attendance.find(params[:id])
     @user = User.find(params[:user_id])
+    @attendances = Attendance.where(application_state: :applying)
+    @users = User.where(params[:user_id])
     @youbi = %w{日 月 火 水 木 金 土}
   end
   
