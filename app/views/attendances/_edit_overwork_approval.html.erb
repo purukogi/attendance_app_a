@@ -8,31 +8,35 @@
     </div>
     <div class="modal-body">
       <div class="row">
-        <div class="col-md-10 col-md-offset-1">
+        <div class="col-md-12">
           <%= form_with(model: @attendance, url: update_overwork_approval_user_attendance_path(@user.id, @attendance.id), local: true, method: :patch) do |f| %>
             <%= render 'shared/error_messages', object: @user %>
             
-            <table class="table table-bordered table-striped table-overwork">
+            <table class="table table-bordered table-striped table-approval">
               <thead>
                 <tr>
                   <th>日付</th>
                   <th>曜日</th>
                   <th>終了予定時間</th>
-                  <th>翌日</th>
+                  <th>指定勤務終了時間</th>
+                  <th>時間外時間</th>
                   <th>業務処理内容</th>
                   <th>指示者確認㊞</th>
+                  <th>変更</th>
+                  <th>勤怠を確認する</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
-                  <td><%= @attendance.worked_on %></td>
-                  <td><%= @youbi[@attendance.worked_on.wday] %></td>
-                  <td><%= f.time_field :scheduled_end_time, class: "form-control" %></td>
-                  <td><%= f.check_box :next_day %></td>
-                  <td><%= f.text_field :work_description, class: "form-control" %></td>
-                  <td>
-                    <%= f.select :authorizer_user_id, Attendance.authorizer_user_ids.keys.to_a, { include_blank: true }, class: "form-control" %>
-                  </td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
                 </tr>
               </tbody>
             </table>
