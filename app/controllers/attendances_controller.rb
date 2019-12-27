@@ -66,13 +66,13 @@ class AttendancesController < ApplicationController
       end
   end
   
-  def edit_overwork_request2
+  def edit_overwork_approval
     @attendance = Attendance.find(params[:id])
     @user = User.find(params[:user_id])
     @youbi = %w{日 月 火 水 木 金 土}
   end
   
-  def update_overwork_request2
+  def update_overwork_approval
     @attendance = Attendance.find(params[:id])
     @user = User.find(params[:user_id])
       if @attendance.update_attributes(overwork_request_params)

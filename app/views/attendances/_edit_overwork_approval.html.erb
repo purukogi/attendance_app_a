@@ -9,7 +9,7 @@
     <div class="modal-body">
       <div class="row">
         <div class="col-md-10 col-md-offset-1">
-          <%= form_with(model: @attendance, url: update_overwork_request2_user_attendance_path(@user.id, @attendance.id), local: true, method: :patch) do |f| %>
+          <%= form_with(model: @attendance, url: update_overwork_approval_user_attendance_path(@user.id, @attendance.id), local: true, method: :patch) do |f| %>
             <%= render 'shared/error_messages', object: @user %>
             
             <table class="table table-bordered table-striped table-overwork">
