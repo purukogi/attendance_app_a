@@ -29,13 +29,10 @@
 
 <% if @user.superior == true %>
 <div class="oshirase">
-   【所属長承認申請のお知らせ】<br>
-   【勤怠変更申請のお知らせ】<br>
-   <% if @applications_to_A.count >= 0 || @applications_to_B.count >= 0 %>
-    
-       <%= link_to "【残業申請のお知らせ】", edit_overwork_request_user_attendance_path(@user.id), remote: true %>
-    
-
+  【所属長承認申請のお知らせ】<br>
+  【勤怠変更申請のお知らせ】<br>
+  <% if @applications_to_A.count >= 0 || @applications_to_B.count >= 0 %>
+    <%= link_to "【残業申請のお知らせ】", edit_overwork_request2_user_attendance_path(@user), remote: true %>
     <% if @user.id == 2 %>
       <span style="border: 2px solid red; color: red;"><%= "#{@applications_to_A.count}件の通知があります" %></span>
     <% elsif @user.id == 3 %>
@@ -190,3 +187,4 @@
 
 <!--モーダルウインドウ表示-->
 <div id="edit_overwork_request" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+<div id="edit_overwork_request2" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>

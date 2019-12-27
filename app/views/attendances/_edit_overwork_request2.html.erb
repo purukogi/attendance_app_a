@@ -1,0 +1,50 @@
+<div class="modal-dialog modal-lg modal-dialog-center">
+  <div class="modal-content">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+      <h4 class="modal-title"></h4>
+    </div>
+    <div class="modal-body">
+      <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+          <%= form_with(model: @attendance, url: update_overwork_request2_user_attendance_path(@user.id, @attendance.id), local: true, method: :patch) do |f| %>
+            <%= render 'shared/error_messages', object: @user %>
+            
+            <table class="table table-bordered table-striped table-overwork">
+              <thead>
+                <tr>
+                  <th>日付</th>
+                  <th>曜日</th>
+                  <th>終了予定時間</th>
+                  <th>翌日</th>
+                  <th>業務処理内容</th>
+                  <th>指示者確認㊞</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><%= @attendance.worked_on %></td>
+                  <td><%= @youbi[@attendance.worked_on.wday] %></td>
+                  <td><%= f.time_field :scheduled_end_time, class: "form-control" %></td>
+                  <td><%= f.check_box :next_day %></td>
+                  <td><%= f.text_field :work_description, class: "form-control" %></td>
+                  <td>
+                    <%= f.select :authorizer_user_id, Attendance.authorizer_user_ids.keys.to_a, { include_blank: true }, class: "form-control" %>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            
+            <%= f.hidden_field :application_state, {value: 'applying'} %>
+
+            <div class="center">
+              <%= f.submit "申請を反映する", class: "btn btn-primary btn-block" %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

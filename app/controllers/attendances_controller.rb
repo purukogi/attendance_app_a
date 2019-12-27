@@ -55,8 +55,26 @@ class AttendancesController < ApplicationController
   end
   
   def update_overwork_request
-      @attendance = Attendance.find(params[:id])
-      @user = User.find(params[:user_id])
+    @attendance = Attendance.find(params[:id])
+    @user = User.find(params[:user_id])
+      if @attendance.update_attributes(overwork_request_params)
+        flash[:success] = "残業を申請しました"
+        redirect_to @user
+      else
+        flash[:danger] = "残業申請は失敗しました。"
+        redirect_to @user
+      end
+  end
+  
+  def edit_overwork_request2
+    @attendance = Attendance.find(params[:id])
+    @user = User.find(params[:user_id])
+    @youbi = %w{日 月 火 水 木 金 土}
+  end
+  
+  def update_overwork_request2
+    @attendance = Attendance.find(params[:id])
+    @user = User.find(params[:user_id])
       if @attendance.update_attributes(overwork_request_params)
         flash[:success] = "残業を申請しました"
         redirect_to @user
