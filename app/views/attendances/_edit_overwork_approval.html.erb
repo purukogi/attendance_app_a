@@ -15,7 +15,7 @@
             <% @users.each do |user| %>
            
             <table class="table table-bordered table-striped table-approval">
-              <p><%= user.name %></p>
+              <p>【<%= user.name %>からの残業申請】</p>
               <thead>
                 <tr>
                   <th>日付</th>
@@ -30,21 +30,42 @@
                 </tr>
               </thead>
               
-            <% @attendances.each do |day| %>
-              <tbody>
-                <tr>
-                  <td><%= day.worked_on %></td>
-                  <td></td>
-                  <td><%= day.scheduled_end_time %></td>
-                  <td></td>
-                  <td><%= day.work_description %></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                </tr>
-              </tbody>
-            <% end %>
+              <% if @user.id == 2 %>
+                <% @applications_to_A.each do |day| %>
+                  <tbody>
+                    <tr>
+                      <td><%= l(day.worked_on, format: :short) %></td>
+                      <td><%= $days_of_the_week[day.worked_on.wday] %></td>
+                      <td><%= l(day.scheduled_end_time, format: :time) %></td>
+                      <td><%= format_basic_info(@user.designated_work_end_time) %></td>
+                      <td></td>
+                      <td><%= day.work_description %></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                    </tr>
+                  </tbody>
+                <% end %>
+              <% end %>
+              
+              <% if @user.id == 3 %>
+                <% @applications_to_B.each do |day| %>
+                  <tbody>
+                    <tr>
+                      <td><%= day.id %></td>
+                      <td><%= day.user_id %></td>
+                      <td><%= day.scheduled_end_time %></td>
+                      <td></td>
+                      <td><%= day.work_description %></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                    </tr>
+                  </tbody>
+                <% end %>
+              <% end %>
+            
             </table>
          
             <% end %>
