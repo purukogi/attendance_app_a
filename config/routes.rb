@@ -36,6 +36,7 @@ Rails.application.routes.draw do
       get 'attendances_edit_log'
       get 'attendances/edit_one_month'
       patch 'attendances/update_one_month'
+      patch 'attendances/onemonth_apply'
     end
     resources :attendances do
       member do

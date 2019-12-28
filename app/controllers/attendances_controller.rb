@@ -48,6 +48,10 @@ class AttendancesController < ApplicationController
     end
   end
   
+  def onemonth_apply
+    
+  end
+  
   def edit_overwork_request
     @attendance = Attendance.find(params[:id])
     @user = User.find(params[:user_id])

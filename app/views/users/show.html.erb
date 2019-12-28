@@ -170,7 +170,14 @@
         <td rowspan="2"></td>
         <td rowspan="2"></td>
         <td rowspan="2"></td>
-        <td rowspan="2"><p>所属長承認 未<br>所属長承認 上長Aへ申請中</p><%= link_to "申請", attendances_edit_one_month_user_path(date: @first_day), class: "btn btn-primary" %></td>
+        <td rowspan="2">
+          <%= form_with(model: @attendance, url: attendances_onemonth_apply_user_path(@user), local: true, method: :patch) do |f| %>
+            <p>所属長承認 未<br>
+            <%= f.select :authorizer_user_id, Attendance.authorizer_user_ids.keys.to_a, { include_blank: true }, class: "form-control" %>
+            </p>
+            <%= link_to "申請", attendances_edit_one_month_user_path(date: @first_day), class: "btn btn-primary btn-block" %>
+          <% end %>
+          </td>
       </tr>
       <tr>
         <td colspan="2"><%= @attendances.count %></td>
