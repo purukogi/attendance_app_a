@@ -13,39 +13,42 @@
             <%= render 'shared/error_messages', object: @user %>
               
               <% if @user.id == 2 %>
-                <% @applications_to_A.each do |day| %>
-                
-                <table class="table table-bordered table-striped table-approval">
-                  <p>てすと</p>
-                 
-                  <thead>
-                    <tr>
-                      <th>日付</th>
-                      <th>曜日</th>
-                      <th>終了予定時間</th>
-                      <th>指定勤務終了時間</th>
-                      <th>時間外時間</th>
-                      <th>業務処理内容</th>
-                      <th>指示者確認㊞</th>
-                      <th>変更</th>
-                      <th>勤怠を確認する</th>
-                    </tr>
-                  </thead>
-                  
-                  <tbody>
-                    <tr>
-                      <td><%= l(day.worked_on, format: :short) %></td>
-                      <td><%= $days_of_the_week[day.worked_on.wday] %></td>
-                      <td><%= l(day.scheduled_end_time, format: :time) %></td>
-                      <td><%= format_basic_info(@user.designated_work_end_time) %></td>
-                      <td><%= day.user_id %></td>
-                      <td><%= day.work_description %></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                    </tr>
-                  </tbody>
-                </table>
+                <% @users.each do |user| %>
+                  <% @applications_to_A.each do |day| %>
+                    <table class="table table-bordered table-striped table-approval">
+                      <% if user.id == day.user_id %>
+                        <p><%= user.name %>からの残業申請</p>
+                      <% end %>
+                      <% if user.id == day.user_id %>
+                        <thead>
+                          <tr>
+                            <th>日付</th>
+                            <th>曜日</th>
+                            <th>終了予定時間</th>
+                            <th>指定勤務終了時間</th>
+                            <th>時間外時間</th>
+                            <th>業務処理内容</th>
+                            <th>指示者確認㊞</th>
+                            <th>変更</th>
+                            <th>勤怠を確認する</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td><%= l(day.worked_on, format: :short) %></td>
+                            <td><%= $days_of_the_week[day.worked_on.wday] %></td>
+                            <td><%= l(day.scheduled_end_time, format: :time) %></td>
+                            <td><%= format_basic_info(@user.designated_work_end_time) %></td>
+                            <td></td>
+                            <td><%= day.work_description %></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                          </tr>
+                        </tbody>
+                      <% end %>
+                    </table>
+                  <% end %>
                 <% end %>
               <% end %>
               
