@@ -21,7 +21,6 @@ Rails.application.routes.draw do
   delete '/destroy', to: 'bases#destroy'
   patch '/update_base_info', to: 'bases#update_base_info'
  
- 
   
   #リソース
   resources :users do
@@ -37,6 +36,8 @@ Rails.application.routes.draw do
       get 'attendances/edit_one_month'
       patch 'attendances/update_one_month'
       patch 'attendances/onemonth_apply'
+      # 勤怠確認ページ
+      get 'check'
     end
     resources :attendances do
       member do

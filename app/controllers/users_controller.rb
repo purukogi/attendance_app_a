@@ -1,10 +1,10 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update, :destroy, :edit_basic_info, :update_basic_info, :edit_overwork_request, :update_overwork_request]
+  before_action :set_user, only: [:show, :check, :edit, :update, :destroy, :edit_basic_info, :update_basic_info, :edit_overwork_request, :update_overwork_request]
   before_action :logged_in_user, only: [:index, :edit, :update, :destroy, :edit_basic_info, :update_basic_info]
   before_action :correct_user, only: [:edit, :update]
   before_action :admin_user, only: [:index, :destroy, :edit_basic_info, :update_basic_info, :working_employee_list]
-  before_action :set_one_month, only: :show
-  before_action :ensure_correct_user, only: :show
+  before_action :set_one_month, only: [:show, :check]
+  before_action :ensure_correct_user, only: [:show, :check]
 
   def index
     @users = query.order(:id).page(params[:page])
@@ -29,6 +29,12 @@ class UsersController < ApplicationController
     @applications_to_A = Attendance.where(authorizer_user_id: "上長Ａ", application_state: :applying)
     @applications_to_B = Attendance.where(authorizer_user_id: "上長Ｂ", application_state: :applying)
     
+  end
+  
+  def check
+    @worked_sum = @attendances.where.not(started_at: nil).count
+    @applications_to_A = Attendance.where(authorizer_user_id: "上長Ａ", application_state: :applying)
+    @applications_to_B = Attendance.where(authorizer_user_id: "上長Ｂ", application_state: :applying)
   end
   
   def ensure_correct_user
