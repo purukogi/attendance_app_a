@@ -33,7 +33,7 @@ class UsersController < ApplicationController
   
   def ensure_correct_user
     if
-      current_user.admin?
+      current_user.superior? 
     elsif
       current_user.id != params[:id].to_i
       flash[:danger] = "編集権限がありません。"
