@@ -76,8 +76,8 @@ class AttendancesController < ApplicationController
     @users = User.all
     # @users = User.joins(:attendances).where(attendances: { application_state: :applying })
     @youbi = %w{日 月 火 水 木 金 土}
-    @applications_to_A = Attendance.where(authorizer_user_id: "上長Ａ", application_state: :applying)
-    @applications_to_B = Attendance.where(authorizer_user_id: "上長Ｂ", application_state: :applying)
+    @applications_to_A = Attendance.where(authorizer_user_id: "上長Ａ", application_state: "申請中")
+    @applications_to_B = Attendance.where(authorizer_user_id: "上長Ｂ", application_state: "申請中")
   end
   
   def update_overwork_approval

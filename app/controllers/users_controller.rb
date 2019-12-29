@@ -26,15 +26,15 @@ class UsersController < ApplicationController
       @worked_sum = @attendances.where.not(started_at: nil).count
     end
     
-    @applications_to_A = Attendance.where(authorizer_user_id: "上長Ａ", application_state: :applying)
-    @applications_to_B = Attendance.where(authorizer_user_id: "上長Ｂ", application_state: :applying)
+    @applications_to_A = Attendance.where(authorizer_user_id: "上長Ａ", application_state: "申請中")
+    @applications_to_B = Attendance.where(authorizer_user_id: "上長Ｂ", application_state: "申請中")
     
   end
   
   def check
     @worked_sum = @attendances.where.not(started_at: nil).count
-    @applications_to_A = Attendance.where(authorizer_user_id: "上長Ａ", application_state: :applying)
-    @applications_to_B = Attendance.where(authorizer_user_id: "上長Ｂ", application_state: :applying)
+    @applications_to_A = Attendance.where(authorizer_user_id: "上長Ａ", application_state: "申請中")
+    @applications_to_B = Attendance.where(authorizer_user_id: "上長Ｂ", application_state: "申請中")
   end
   
   def ensure_correct_user

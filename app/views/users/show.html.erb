@@ -33,7 +33,7 @@
 <div class="oshirase">
   【所属長承認申請のお知らせ】<br>
   【勤怠変更申請のお知らせ】<br>
-  <% if @applications_to_A.count >= 0 || @applications_to_B.count >= 0 %>
+  <% if @applications_to_A.count > 0 || @applications_to_B.count > 0 %>
     <%= link_to "【残業申請のお知らせ】", edit_overwork_approval_user_attendance_path(@user), remote: true %>
     <% if @user.id == 2 %>
       <span style="border: 2px solid red; color: red;"><%= "#{@applications_to_A.count}件の通知があります" %></span>
@@ -41,10 +41,8 @@
       <span style="border: 2px solid red; color: red;"><%= "#{@applications_to_B.count}件の通知があります" %></span>
     <% end %>
     
-  <% elsif %>
-   【所属長承認申請のお知らせ】<br>
-   【勤怠変更申請のお知らせ】<br>
-   【残業申請のお知らせ】
+  <% elsif @applications_to_A.count == 0 || @applications_to_B.count == 0 %>
+  【残業申請のお知らせ】
   <% end %>
 
 </div>
