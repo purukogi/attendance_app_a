@@ -149,9 +149,9 @@
           </td>
           <td><%= day.work_description %></td>
           <td>
-            <% if day.authorizer_user_id == "上長Ａ" && day.application_state == "applying" %>
+            <% if day.authorizer_user_id == "上長Ａ" && day.application_state == "申請中" %>
               <%= "上長Ａに残業申請中" %>
-            <% elsif day.authorizer_user_id == "上長Ｂ" && day.application_state == "applying" %>
+            <% elsif day.authorizer_user_id == "上長Ｂ" && day.application_state == "申請中" %>
               <%= "上長Ｂに残業申請中" %>
             <% end %>
           </td>
