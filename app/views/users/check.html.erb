@@ -5,12 +5,7 @@
 <div>
   <table class="table table-bordered table-condensed user-table">
     <tr>
-      <td>
-        <% if @user.attendance_check == "true" %>
-          <%= link_to "←", user_path(date: @first_day.prev_month), class: "btn btn-info" %>
-        <% end %>
-      <%= l(@first_day, format: :middle) %>　時間管理表
-  <%= link_to "→", user_path(date: @first_day.next_month), class: "btn btn-info" %></td>
+      <td style="vertical-align: middle;"><%= l(@first_day, format: :middle) %>　時間管理表</td>
       <td style="height:20px; line-height:20px;">
         指定勤務開始時間　<%= format_basic_info(@user.designated_work_start_time) %><br>
         指定勤務終了時間　<%= format_basic_info(@user.designated_work_end_time) %>
@@ -30,33 +25,6 @@
   </table>
 </div>
 
-<% if @user.superior == true %>
-<div class="oshirase">
-  【所属長承認申請のお知らせ】<br>
-  【勤怠変更申請のお知らせ】<br>
-  <% if @applications_to_A.count >= 0 || @applications_to_B.count >= 0 %>
-    <%= link_to "【残業申請のお知らせ】", edit_overwork_approval_user_attendance_path(@user), remote: true %>
-    <% if @user.id == 2 %>
-      <span style="border: 2px solid red; color: red;"><%= "#{@applications_to_A.count}件の通知があります" %></span>
-    <% elsif @user.id == 3 %>
-      <span style="border: 2px solid red; color: red;"><%= "#{@applications_to_B.count}件の通知があります" %></span>
-    <% end %>
-    
-  <% elsif %>
-   【所属長承認申請のお知らせ】<br>
-   【勤怠変更申請のお知らせ】<br>
-   【残業申請のお知らせ】
-  <% end %>
-
-</div>
-<% end %>
-
-<div class="btn-users-show">
-  <%= link_to "勤怠を編集", attendances_edit_one_month_user_path(date: @first_day), class: "btn btn-primary" %>
-  <%= link_to "CSV出力", attendances_edit_one_month_user_path(date: @first_day), class: "btn btn-primary" %><br>
-  <p style="margin:5px 0;">
-  <%= link_to "勤怠修正ログ（承認済）", attendances_edit_log_user_path(date: @first_day), class: "btn btn-primary" %></p>
-</div>
 
 <div>
   <table class="table table-bordered table-striped table-condensed table-hover table-margin" id="table-attendances">
@@ -98,7 +66,7 @@
     <tbody>
       <% @attendances.each do |day| %>
         <tr>
-          <td><%= link_to "残業申請", edit_overwork_request_user_attendance_path(@user.id, day), remote: true, class: "btn btn-primary" %></td>
+          <td></td>
           <td><%= l(day.worked_on, format: :short) %></td><!-- 日付 -->
           <td>
             <% if day.worked_on.wday == 0 %>
@@ -109,22 +77,11 @@
               <%= $days_of_the_week[day.worked_on.wday] %>
             <% end %>
           </td><!-- 曜日 -->
-          
-          <td><!-- 出退勤用ボタン -->
-         
-            <% if btn_text = attendance_state(day) %>
-              <%= link_to "#{btn_text}", user_attendance_path(@user, day), method: :patch, class: "btn btn-primary btn-attendance" %>
-            <% end %>
-          </td>
+          <td><!-- 出退勤用ボタン --></td>
           <td><%= l(day.started_at, format: :hour) if day.started_at.present? %></td><!-- 出社の時 -->
           <td><%= l(day.started_at.floor_to(15.minutes), format: :min) if day.started_at.present? %></td><!-- 出社の分 -->
         
-          <td><!-- 出退勤用ボタン -->
-            <% if btn_text = attendance_state2(day) %>
-              <%= link_to "#{btn_text}", user_attendance_path(@user, day), method: :patch, class: "btn btn-primary btn-attendance" %>
-            <% end %>
-          </td>
-          
+          <td><!-- 出退勤用ボタン --></td>
           <td><%= l(day.finished_at, format: :hour) if day.finished_at.present? %></td><!-- 退社の時 -->
           <td><%= l(day.finished_at.floor_to(15.minutes), format: :min) if day.finished_at.present? %></td><!-- 退社の分 -->
         
@@ -173,14 +130,7 @@
         <td rowspan="2"></td>
         <td rowspan="2"></td>
         <td rowspan="2"></td>
-        <td rowspan="2">
-          <%= form_with(model: @attendance, url: attendances_onemonth_apply_user_path(@user), local: true, method: :patch) do |f| %>
-            <p>所属長承認 未<br>
-            <%= f.select :authorizer_user_id, Attendance.authorizer_user_ids.keys.to_a, { include_blank: true }, class: "form-control" %>
-            </p>
-            <%= link_to "申請", attendances_edit_one_month_user_path(date: @first_day), class: "btn btn-primary btn-block" %>
-          <% end %>
-          </td>
+        <td rowspan="2"><p>所属長承認 未</p></td>
       </tr>
       <tr>
         <td colspan="2"><%= @attendances.count %></td>
