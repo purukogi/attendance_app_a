@@ -81,15 +81,18 @@ class AttendancesController < ApplicationController
   end
   
   def update_overwork_approval
-    @attendance = Attendance.find(params[:id])
-    @user = User.find(params[:user_id])
-      if @attendance.update_attributes(overwork_request_params)
-        flash[:success] = "残業を申請しました"
-        redirect_to @user
-      else
-        flash[:danger] = "残業申請は失敗しました。"
-        redirect_to @user
+    @user = User.find(params[:id])
+    ActiveRecord::Base.transaction do # トランザクションを開始します。
+      overwork_approval_params.each do |id, item|
+      attendance = Attendance.find(id)
+      attendance.update_attributes!(item)
       end
+    end
+    flash[:success] = "残業申請を承認しました。"
+    redirect_to @user
+  rescue ActiveRecord::RecordInvalid # トランザクションによるエラーの分岐です。
+    flash[:danger] = "無効な入力データがあった為、承認をキャンセルしました。"
+    redirect_to @user
   end
   
   private
@@ -101,6 +104,10 @@ class AttendancesController < ApplicationController
     
     def overwork_request_params
       params.require(:attendance).permit(:scheduled_end_time, :next_day, :work_description, :authorizer_user_id, :application_state)
+    end
+    
+    def overwork_approval_params
+      params.require(:user).permit(attendances: [:application_state])[:attendances]
     end
 
     # beforeフィルター

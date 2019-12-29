@@ -9,12 +9,13 @@
     <div class="modal-body">
       <div class="row">
         <div class="col-md-12">
-          <%= form_with(model: @attendance, url: update_overwork_approval_user_attendance_path(@user.id, @attendance.id), local: true, method: :patch) do |f| %>
+          <%= form_with(model: @user, url: update_overwork_approval_user_attendance_path(@user.id, @attendance.id), local: true, method: :patch) do |f| %>
             <%= render 'shared/error_messages', object: @user %>
               
               <% if @user.id == 2 %>
                 <% @users.each do |user| %>
                   <% @applications_to_A.each do |day| %>
+                   
                     <table class="table table-bordered table-striped table-approval">
                       <% if user.id == day.user_id %>
                         <p><%= user.name %>からの残業申請</p>
@@ -50,7 +51,9 @@
                             </td>
                             <td><%= day.work_description %></td>
                             <td>
-                              <%= f.select :application_state, Attendance.application_states.keys.to_a, { include_blank: false }, class: "form-control" %>
+                              <%= fields_for "@applications_to_A[]", day do |af| %>
+                                <%= af.select :application_state, Attendance.application_states.keys.to_a, { include_blank: false }, class: "form-control" %>
+                              <% end %>
                             </td>
                             <td></td>
                             <td>
@@ -85,10 +88,6 @@
                 </table>
                 <% end %>
               <% end %>
-            
-           
-            
-            <%= f.hidden_field :application_state, {value: 'applying'} %>
 
             <div class="center">
               <%= f.submit "申請を反映する", class: "btn btn-primary btn-block" %>
