@@ -39,11 +39,21 @@
                             <td><%= $days_of_the_week[day.worked_on.wday] %></td>
                             <td><%= l(day.scheduled_end_time, format: :time) %></td>
                             <td><%= format_basic_info(@user.designated_work_end_time) %></td>
-                            <td></td>
+                            <td>
+                              <% if day.scheduled_end_time.present? %>
+                                <% if day.next_day == true %>
+                                  <%= format_basic_info(day.scheduled_end_time).to_f + format_basic_info(@user.designated_work_end_time - 12.hour).to_f %>
+                                <% else %>
+                                  <%= format_basic_info(day.scheduled_end_time).to_f - format_basic_info(@user.designated_work_end_time).to_f %>
+                                <% end %>
+                              <% end %>
+                            </td>
                             <td><%= day.work_description %></td>
                             <td></td>
                             <td></td>
-                            <td></td>
+                            <td>
+                              <%= link_to "確認", user_path(day.user_id), class: "btn btn-primary" %>
+                            </td>
                           </tr>
                         </tbody>
                       <% end %>
@@ -65,7 +75,9 @@
                       <td></td>
                       <td></td>
                       <td></td>
-                      <td></td>
+                      <td>
+                        <%= link_to "確認", local: true, class: "btn btn-primary" %>
+                      </td>
                     </tr>
                   </tbody>
                 </table>
