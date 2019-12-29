@@ -50,7 +50,7 @@
                             </td>
                             <td><%= day.work_description %></td>
                             <td>
-                              <%= f.select :application_state, Attendance.application_states_i18n, { include_blank: false }, class: "form-control" %>
+                              <%= f.select :application_state, Attendance.application_states.keys.to_a, { include_blank: false }, class: "form-control" %>
                             </td>
                             <td></td>
                             <td>
