@@ -136,7 +136,7 @@ class UsersController < ApplicationController
     end
     
     def onemonth_apply_params
-      params.require(:user).permit(:month_authorizer)
+      params.require(:user).permit(:month_authorizer, :onemonth_application_state)
     end
     
     

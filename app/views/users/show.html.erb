@@ -172,11 +172,22 @@
         <td rowspan="2"></td>
         <td rowspan="2">
           <%= form_with(model: @user, url: onemonth_apply_user_path(@user.id), local: true, method: :patch) do |f| %>
-            <p>所属長承認 未<br>
+            <p>
+              <% if @user.onemonth_application_state == "申請中" && @user.month_authorizer == "上長Ａ" %>
+              所属長承認　上長Ａに申請中
+              <% elsif @user.onemonth_application_state == "申請中" && @user.month_authorizer == "上長Ｂ" %>
+              所属長承認　上長Ｂに申請中
+              <% else %>
+              所属長申請　未
+              <% end %>
+            </p>
+              
+            <p>
             <%= f.select :month_authorizer, User.month_authorizers.keys.to_a, { include_blank: true }, class: "form-control" %>
             </p>
-            <%= f.hidden_field :onemonth_application_state, {value: 'applying'} %>
+            <%= f.hidden_field :onemonth_application_state, {value: '申請中'} %>
             <%= f.submit "申請", class: "btn btn-primary btn-block" %>
+            
           <% end %>
           </td>
       </tr>

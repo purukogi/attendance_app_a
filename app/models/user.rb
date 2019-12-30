@@ -3,8 +3,9 @@ class User < ApplicationRecord
   require 'rails/all'
   require 'csv'
   has_many :attendances, dependent: :destroy
+  # 1ヵ月勤怠申請状態（0:無 1:申請中 2:承認 3:否認）
+  enum onemonth_application_state: { "なし" => 0, "申請中" => 1, "承認" => 2, "否認" => 3 }
     # 1ヵ月分の勤怠承認者選択
-  # enum month_authorizer: { superiorA: 1, superiorB: 2 }
   enum month_authorizer: { "上長Ａ" => 1, "上長Ｂ" => 2 }
   
   # 「remember_token」という仮想の属性を作成します。
