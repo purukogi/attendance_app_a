@@ -127,6 +127,15 @@ class UsersController < ApplicationController
       end
   end
   
+  def onemonth_approval
+    @user = User.find(params[:id])
+    @day = params[:date]
+  end
+  
+  def update_onemonth_approval
+    @user = User.find(params[:id])
+  end
+  
   private # strongparameterの設定
 
     def user_params

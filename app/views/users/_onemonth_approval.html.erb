@@ -1,0 +1,44 @@
+<div class="modal-dialog modal-lg modal-dialog-center">
+  <div class="modal-content">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+      <h4 class="modal-title"></h4>
+    </div>
+    <div class="modal-body">
+      <div class="row">
+        <div class="col-md-12">
+          <%= form_with(model: @user, url: update_onemonth_approval_user_path(@user), local: true, method: :patch) do |f| %>
+            <%= render 'shared/error_messages', object: @user %>
+            
+              <p><%= @user.name %>からの1ヵ月分勤怠申請</p>
+              <table class="table table-bordered table-striped table-approval">
+                <thead>
+                  <tr>
+                    <th>月</th>
+                    <th>指示者確認㊞</th>
+                    <th>変更</th>
+                    <th>勤怠を確認する</th>
+                  </tr>
+                </thead>
+                
+                <tbody>
+                  <tr>
+                  <td><%= @day %></td>
+                  <td><%= f.select :onemonth_application_state, User.onemonth_application_states.keys.to_a, { include_blank: false }, class: "form-control" %></td>
+                  <td></td>
+                  <td></td>
+                  </tr>
+                </tbody>
+              </table>
+         
+          <div class="center">
+          <%= f.submit "申請を反映する", class: "btn btn-primary btn-block" %>
+          </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -49,6 +49,7 @@ ja:
       default: "%Y/%m/%d"
       long: "%Y年%m月%d日(%a)"
       middle: "%Y年%m月"
+      short3: "%m月"
       short2: "%m/%d"
       short: "%-m/%-d"
     month_names:
