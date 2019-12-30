@@ -114,6 +114,17 @@ class UsersController < ApplicationController
   def attendances_edit_log
   end
   
+  def onemonth_apply
+    @user = User.find(params[:id])
+      if @user.update_attributes(onemonth_apply_params)
+        flash[:success] = "今月の勤怠を申請しました"
+        redirect_to @user
+      else
+        flash[:danger] = "勤怠申請は失敗しました。"
+        redirect_to @user
+      end
+  end
+  
   private # strongparameterの設定
 
     def user_params
@@ -122,6 +133,10 @@ class UsersController < ApplicationController
 
     def works_params
       params.require(:user).permit(:id, :basic_work_time, :designated_work_start_time , :designated_work_end_time)
+    end
+    
+    def onemonth_apply_params
+      params.require(:user).permit(:month_authorizer)
     end
     
     

@@ -48,10 +48,6 @@ class AttendancesController < ApplicationController
     end
   end
   
-  def onemonth_apply
-    
-  end
-  
   def edit_overwork_request
     @attendance = Attendance.find(params[:id])
     @user = User.find(params[:user_id])
@@ -109,6 +105,7 @@ class AttendancesController < ApplicationController
     def overwork_approval_params
       params.require(:user).permit(attendances: [:application_state])[:attendances]
     end
+ 
 
     # beforeフィルター
 

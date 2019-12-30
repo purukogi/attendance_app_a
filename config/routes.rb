@@ -35,7 +35,7 @@ Rails.application.routes.draw do
       get 'attendances_edit_log'
       get 'attendances/edit_one_month'
       patch 'attendances/update_one_month'
-      patch 'attendances/onemonth_apply'
+      patch 'onemonth_apply'
       # 勤怠確認ページ
       get 'check'
     end
