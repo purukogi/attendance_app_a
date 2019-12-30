@@ -31,33 +31,27 @@
 
 <% if @user.superior == true %>
   <div class="oshirase">
-    <% if @month_applications_A.count > 0 || @month_applications_B.count > 0 %>
+    
+    <% if @user.id == 2 && @month_applications_A.count > 0 %>
       <%= link_to "【所属長承認申請のお知らせ】", edit_overwork_approval_user_attendance_path(@user), remote: true %>
-      <% if @user.id == 2 %>
-        <span style="border: 2px solid red; color: red;"><%= "#{@month_applications_A.count}件の通知があります" %></span>
-      <% elsif @user.id == 3 %>
-        <span style="border: 2px solid red; color: red;"><%= "#{@month_applications_B.count}件の通知があります" %></span>
-      <% end %>
-    <br>
-    <% elsif @month_applications_A.count == 0 %>
-     【所属長承認申請のお知らせ】<br>
-    <% elsif @month_applications_B.count == 0 %>
+      <span style="border: 2px solid red; color: red;"><%= "#{@month_applications_A.count}件の通知があります" %></span><br>
+    <% elsif @user.id == 3 && @month_applications_B.count > 0 %>
+      <span style="border: 2px solid red; color: red;"><%= "#{@month_applications_B.count}件の通知があります" %></span><br>
+    <% else %>
      【所属長承認申請のお知らせ】<br>
     <% end %>
  
      【勤怠変更申請のお知らせ】<br>
   
-    <% if @applications_to_A.count > 0 || @applications_to_B.count > 0 %>
+    <% if @user.id == 2 && @applications_to_A.count > 0 %>
       <%= link_to "【残業申請のお知らせ】", edit_overwork_approval_user_attendance_path(@user), remote: true %>
-      <% if @user.id == 2 %>
-        <span style="border: 2px solid red; color: red;"><%= "#{@applications_to_A.count}件の通知があります" %></span>
-      <% elsif @user.id == 3 %>
-        <span style="border: 2px solid red; color: red;"><%= "#{@applications_to_B.count}件の通知があります" %></span>
-      <% end %>
-    
-    <% elsif @applications_to_A.count == 0 || @applications_to_B.count == 0 %>
+      <span style="border: 2px solid red; color: red;"><%= "#{@applications_to_A.count}件の通知があります" %></span>
+    <% elsif @user.id == 3 && @applications_to_B.count > 0 %>
+      <span style="border: 2px solid red; color: red;"><%= "#{@applications_to_B.count}件の通知があります" %></span>
+    <% else %>
     【残業申請のお知らせ】
     <% end %>
+    
   </div>
 <% end %>
 
