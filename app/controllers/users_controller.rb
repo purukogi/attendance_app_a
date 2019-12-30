@@ -129,6 +129,7 @@ class UsersController < ApplicationController
   
   def onemonth_approval
     @user = User.find(params[:id])
+    Date.current.strftime('%m')
     @day = params[:date]
   end
   
