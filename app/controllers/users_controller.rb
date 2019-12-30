@@ -30,6 +30,8 @@ class UsersController < ApplicationController
     @applications_to_B = Attendance.where(authorizer_user_id: "上長Ｂ", application_state: "申請中")
     @month_applications_A = User.where(month_authorizer: "上長Ａ", onemonth_application_state: "申請中")
     @month_applications_B = User.where(month_authorizer: "上長Ｂ", onemonth_application_state: "申請中")
+    @edit_applications_A = Attendance.where(change_authorizer: "上長A", application_edit_state: "申請中　")
+    @edit_applications_B = Attendance.where(change_authorizer: "上長B", application_edit_state: "申請中　")
     
   end
   

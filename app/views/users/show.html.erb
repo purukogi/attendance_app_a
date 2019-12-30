@@ -2,6 +2,8 @@
 
 <% require 'rounding' %>
 
+
+
 <div>
   <table class="table table-bordered table-condensed user-table">
     <tr>
@@ -41,7 +43,14 @@
      【所属長承認申請のお知らせ】<br>
     <% end %>
  
+    <% if @user.id == 2 && @edit_applications_A.count > 0 %>
+      <%= link_to "【勤怠変更申請のお知らせ】", onemonth_approval_user_path(date: @first_day), remote: true %>
+      <span style="border: 2px solid red; color: red;"><%= "#{@edit_applications_A.count}件の通知があります" %></span><br>
+    <% elsif @user.id == 3 && @edit_applications_B.count > 0 %>
+      <span style="border: 2px solid red; color: red;"><%= "#{@edit_applications_B.count}件の通知があります" %></span><br>
+    <% else %>
      【勤怠変更申請のお知らせ】<br>
+    <% end %>
   
     <% if @user.id == 2 && @applications_to_A.count > 0 %>
       <%= link_to "【残業申請のお知らせ】", edit_overwork_approval_user_attendance_path(@user), remote: true %>
@@ -101,6 +110,7 @@
 
     <tbody>
       <% @attendances.each do |day| %>
+
         <tr>
           <td><%= link_to "残業申請", edit_overwork_request_user_attendance_path(@user.id, day), remote: true, class: "btn btn-primary" %></td>
           <td><%= l(day.worked_on, format: :short) %></td><!-- 日付 -->
