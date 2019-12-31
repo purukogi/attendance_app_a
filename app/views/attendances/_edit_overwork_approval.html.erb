@@ -40,7 +40,7 @@
                                 <td><%= l(application.worked_on, format: :short) %></td>
                                 <td><%= $days_of_the_week[application.worked_on.wday] %></td>
                                 <td><%= l(application.scheduled_end_time, format: :time) %></td>
-                                <td></td>
+                                <td><%= format_basic_info(@user.designated_work_end_time) %></td>
                                 <td>
                                   <% if application.scheduled_end_time.present? %>
                                     <% if application.next_day == true %>
