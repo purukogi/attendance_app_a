@@ -13,13 +13,12 @@
             <%= render 'shared/error_messages', object: @user %>
               
               <% if @user.id == 2 %>
-                <% @users.each do |user| %>
-                  <% @applications_to_A.each do |day| %>
+               
+                  <% @overwork_applicationsA.each do |name, applications| %>
                     <table class="table table-bordered table-striped table-approval">
-                      <% if user.id == day.user_id %>
-                        <p><%= user.name %>からの残業申請</p>
-                      <% end %>
-                      <% if user.id == day.user_id %>
+                      
+                        <p>【 <%= name %> からの残業申請】</p>
+                     
                         <thead>
                           <tr>
                             <th>日付</th>
@@ -33,37 +32,38 @@
                             <th>勤怠を確認する</th>
                           </tr>
                         </thead>
+                        
                         <tbody>
-                          <tr>
-                            <td><%= l(day.worked_on, format: :short) %></td>
-                            <td><%= $days_of_the_week[day.worked_on.wday] %></td>
-                            <td><%= l(day.scheduled_end_time, format: :time) %></td>
-                            <td><%= format_basic_info(@user.designated_work_end_time) %></td>
-                            <td>
-                              <% if day.scheduled_end_time.present? %>
-                                <% if day.next_day == true %>
-                                  <%= format_basic_info(day.scheduled_end_time).to_f + format_basic_info(@user.designated_work_end_time - 12.hour).to_f %>
-                                <% else %>
-                                  <%= format_basic_info(day.scheduled_end_time).to_f - format_basic_info(@user.designated_work_end_time).to_f %>
-                                <% end %>
-                              <% end %>
-                            </td>
-                            <td><%= day.work_description %></td>
-                            <td>
-                              <%= fields_for "@applications_to_A[]", day do |af| %>
-                                <%= af.select :application_state, Attendance.application_states.keys.to_a, { include_blank: false }, class: "form-control" %>
-                              <% end %>
-                            </td>
-                            <td></td>
-                            <td>
-                              <%= link_to "確認", check_user_path(day.user_id), class: "btn btn-primary" %>
-                            </td>
-                          </tr>
+                          <% applications.each do |application| %>
+                            <%= fields_for("application[]", application) do |f| %>
+                              <tr>
+                                <td><%= l(application.worked_on, format: :short) %></td>
+                                <td><%= $days_of_the_week[application.worked_on.wday] %></td>
+                                <td><%= l(application.scheduled_end_time, format: :time) %></td>
+                                <td></td>
+                                <td>
+                                  <% if application.scheduled_end_time.present? %>
+                                    <% if application.next_day == true %>
+                                      <%= format_basic_info(application.scheduled_end_time).to_f + format_basic_info(@user.designated_work_end_time - 12.hour).to_f %>
+                                    <% else %>
+                                      <%= format_basic_info(application.scheduled_end_time).to_f - format_basic_info(@user.designated_work_end_time).to_f %>
+                                    <% end %>
+                                  <% end %>
+                                </td>
+                                <td><%= application.work_description %></td>
+                                <td>
+                                  <%= f.select :application_state, Attendance.application_states.keys.to_a, { include_blank: false }, class: "form-control" %>
+                                </td>
+                                <td></td>
+                                <td>
+                                  <%= link_to "確認", check_user_path(application.user_id), class: "btn btn-primary" %>
+                                </td>
+                              </tr>
+                            <% end %>
+                          <% end %>
                         </tbody>
-                      <% end %>
                     </table>
                   <% end %>
-                <% end %>
               <% end %>
               
               <% if @user.id == 3 %>

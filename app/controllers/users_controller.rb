@@ -26,10 +26,13 @@ class UsersController < ApplicationController
       @worked_sum = @attendances.where.not(started_at: nil).count
     end
     
+    # 一日分の残業申請を行った勤怠データを取得
     @applications_to_A = Attendance.where(authorizer_user_id: "上長Ａ", application_state: "申請中")
     @applications_to_B = Attendance.where(authorizer_user_id: "上長Ｂ", application_state: "申請中")
+    # 一ヵ月分の残業申請を行った勤怠データを取得
     @month_applications_A = User.where(month_authorizer: "上長Ａ", onemonth_application_state: "申請中")
     @month_applications_B = User.where(month_authorizer: "上長Ｂ", onemonth_application_state: "申請中")
+    # 勤怠変更を行った勤怠データを取得
     @edit_applications_A = Attendance.where(change_authorizer: "上長A", application_edit_state: "申請中　")
     @edit_applications_B = Attendance.where(change_authorizer: "上長B", application_edit_state: "申請中　")
     
