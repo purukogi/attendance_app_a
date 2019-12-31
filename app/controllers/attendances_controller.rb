@@ -86,12 +86,10 @@ class AttendancesController < ApplicationController
   
   def update_overwork_approval
     @user = User.find(params[:id])
-    ActiveRecord::Base.transaction do # トランザクションを開始します。
       overwork_approval_params.each do |id, item|
       attendance = Attendance.find(id)
       attendance.update_attributes!(item)
       end
-    end
     flash[:success] = "残業申請を承認しました。"
     redirect_to @user
   rescue ActiveRecord::RecordInvalid # トランザクションによるエラーの分岐です。
