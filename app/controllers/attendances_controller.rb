@@ -88,8 +88,12 @@ class AttendancesController < ApplicationController
     @user = User.find(params[:id])
     
     if @user.id == 2
-      @applying = Attendance.where(authorizer_user_id: "上長Ａ")
-      @applying.update_all(:application_state => 'なし')
+      params[:application].each do |id, item|
+      @attendance = Attendance.find(id)
+      @attendance.update_attributes(item.permit(:application_state))
+      end
+      # @applying = Attendance.where(authorizer_user_id: "上長Ａ")
+      # @applying.update_all(:application_state => 'なし')
       # @approval = Attendance.where(authorizer_user_id: "上長Ａ", application_state: "承認")
       # @approval.update_all(:application_state => '承認')
     end
