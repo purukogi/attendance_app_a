@@ -51,7 +51,7 @@
                       <td>
                         <%= f.select :application_state, Attendance.application_states.keys.to_a, { include_blank: false }, class: "form-control" %>
                       </td>
-                      <td></td>
+                      <td><%= f.check_box :check %></td>
                       <td>
                         <%= link_to "確認", check_user_path(application.user_id), class: "btn btn-primary" %>
                       </td>
@@ -110,7 +110,7 @@
                       <td>
                         <%= f.select :application_state, Attendance.application_states.keys.to_a, { include_blank: false }, class: "form-control" %>
                       </td>
-                      <td></td>
+                      <td><%= f.check_box :check %></td>
                       <td>
                         <%= link_to "確認", check_user_path(application.user_id), class: "btn btn-primary" %>
                       </td>

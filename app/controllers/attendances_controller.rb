@@ -88,26 +88,19 @@ class AttendancesController < ApplicationController
   
   def update_overwork_approval
     @user = User.find(params[:id])
-    
-    if @user.id == 2
       params[:application].each do |id, item|
       @attendance = Attendance.find(id)
-      @attendance.update_attributes(item.permit(:application_state))
+      @attendance.update_attributes(item.permit(:application_state, :check))
       end
-    elsif @user.id == 3
-      params[:application].each do |id, item|
-      @attendance = Attendance.find(id)
-      @attendance.update_attributes(item.permit(:application_state))
-      end
-      # @applying = Attendance.where(authorizer_user_id: "上長Ａ")
-      # @applying.update_all(:application_state => 'なし')
-      # @approval = Attendance.where(authorizer_user_id: "上長Ａ", application_state: "承認")
-      # @approval.update_all(:application_state => '承認')
-    end
-     
-    flash[:success] = "申請を承認 or 否認しました。"
-    redirect_to @user
+      flash[:success] = "申請を承認 or 否認しました。"
+      redirect_to @user
   end
+           
+    # @applying = Attendance.where(authorizer_user_id: "上長Ａ")
+    # @applying.update_all(:application_state => 'なし')
+    # @approval = Attendance.where(authorizer_user_id: "上長Ａ", application_state: "承認")
+    # @approval.update_all(:application_state => '承認')
+  
   
   private
 
