@@ -86,14 +86,15 @@ class AttendancesController < ApplicationController
   
   def update_overwork_approval
     @user = User.find(params[:id])
-      overwork_approval_params.each do |id, item|
-      attendance = Attendance.find(id)
-      attendance.update_attributes!(item)
-      end
-    flash[:success] = "残業申請を承認しました。"
-    redirect_to @user
-  rescue ActiveRecord::RecordInvalid # トランザクションによるエラーの分岐です。
-    flash[:danger] = "無効な入力データがあった為、承認をキャンセルしました。"
+    
+    if @user.id == 2
+      @applying = Attendance.where(authorizer_user_id: "上長Ａ")
+      @applying.update_all(:application_state => 'なし')
+      # @approval = Attendance.where(authorizer_user_id: "上長Ａ", application_state: "承認")
+      # @approval.update_all(:application_state => '承認')
+    end
+     
+    flash[:success] = "申請を承認 or 否認しました。"
     redirect_to @user
   end
   
@@ -109,7 +110,7 @@ class AttendancesController < ApplicationController
     end
     
     def overwork_approval_params
-      params.require(:user).permit(attendances: [:application_state])[:attendances]
+      params.permit(:application_state)
     end
  
 

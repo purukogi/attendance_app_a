@@ -11,7 +11,7 @@
         <div class="col-md-12">
           
         <% if @user.id == 2 %>
-          <%= form_with(model: @user, url: update_overwork_approval_user_attendance_path(@user.id, @attendance.id), local: true, method: :patch) do |f| %>
+          <%= form_with(model: @user, url: update_overwork_approval_user_attendance_path(@user.id), local: true, method: :patch) do |f| %>
             <%= render 'shared/error_messages', object: @user %>
               <% @overwork_applicationsA.each do |name, applications| %>
               <table class="table table-bordered table-striped table-approval">

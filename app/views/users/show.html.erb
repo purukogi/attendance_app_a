@@ -166,8 +166,12 @@
           <td>
             <% if day.authorizer_user_id == "上長Ａ" && day.application_state == "申請中" %>
               <%= "上長Ａに残業申請中" %>
+            <% elsif day.authorizer_user_id == "上長Ａ" && day.application_state == "承認" %>
+              <%= "上長Ａに承認済" %>
             <% elsif day.authorizer_user_id == "上長Ｂ" && day.application_state == "申請中" %>
               <%= "上長Ｂに残業申請中" %>
+            <% elsif day.authorizer_user_id == "上長Ｂ" && day.application_state == "承認" %>
+              <%= "上長Ｂに承認済" %>
             <% end %>
           </td>
         </tr>
