@@ -25,7 +25,7 @@
                 
                 <tbody>
                   <tr>
-                  <td><%= @day %></td>
+                  <td><%= @day.month %>月</td>
                   <td><%= f.select :onemonth_application_state, User.onemonth_application_states.keys.to_a, { include_blank: false }, class: "form-control" %></td>
                   <td></td>
                   <td></td>
