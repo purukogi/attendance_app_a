@@ -38,6 +38,7 @@
       <%= link_to "【所属長承認申請のお知らせ】", onemonth_approval_user_path(date: @first_day), remote: true %>
       <span style="border: 2px solid red; color: red;"><%= "#{@month_applications_A.count}件の通知があります" %></span><br>
     <% elsif @user.id == 3 && @month_applications_B.count > 0 %>
+      <%= link_to "【所属長承認申請のお知らせ】", onemonth_approval_user_path(date: @first_day), remote: true %>
       <span style="border: 2px solid red; color: red;"><%= "#{@month_applications_B.count}件の通知があります" %></span><br>
     <% else %>
      【所属長承認申請のお知らせ】<br>
@@ -47,6 +48,7 @@
       <%= link_to "【勤怠変更申請のお知らせ】", onemonth_approval_user_path(date: @first_day), remote: true %>
       <span style="border: 2px solid red; color: red;"><%= "#{@edit_applications_A.count}件の通知があります" %></span><br>
     <% elsif @user.id == 3 && @edit_applications_B.count > 0 %>
+      <%= link_to "【勤怠変更申請のお知らせ】", onemonth_approval_user_path(date: @first_day), remote: true %>
       <span style="border: 2px solid red; color: red;"><%= "#{@edit_applications_B.count}件の通知があります" %></span><br>
     <% else %>
      【勤怠変更申請のお知らせ】<br>
@@ -56,6 +58,7 @@
       <%= link_to "【残業申請のお知らせ】", edit_overwork_approval_user_attendance_path(@user), remote: true %>
       <span style="border: 2px solid red; color: red;"><%= "#{@applications_to_A.count}件の通知があります" %></span>
     <% elsif @user.id == 3 && @applications_to_B.count > 0 %>
+      <%= link_to "【残業申請のお知らせ】", edit_overwork_approval_user_attendance_path(@user), remote: true %>
       <span style="border: 2px solid red; color: red;"><%= "#{@applications_to_B.count}件の通知があります" %></span>
     <% else %>
     【残業申請のお知らせ】
@@ -167,11 +170,15 @@
             <% if day.authorizer_user_id == "上長Ａ" && day.application_state == "申請中" %>
               <%= "上長Ａに残業申請中" %>
             <% elsif day.authorizer_user_id == "上長Ａ" && day.application_state == "承認" %>
-              <%= "上長Ａに承認済" %>
+              <%= "残業承認済" %>
+            <% elsif day.authorizer_user_id == "上長Ａ" && day.application_state == "否認" %>
+              <%= "残業否認" %>
             <% elsif day.authorizer_user_id == "上長Ｂ" && day.application_state == "申請中" %>
               <%= "上長Ｂに残業申請中" %>
             <% elsif day.authorizer_user_id == "上長Ｂ" && day.application_state == "承認" %>
-              <%= "上長Ｂに承認済" %>
+              <%= "残業承認済" %>
+            <% elsif day.authorizer_user_id == "上長Ｂ" && day.application_state == "否認" %>
+              <%= "残業否認" %>
             <% end %>
           </td>
         </tr>

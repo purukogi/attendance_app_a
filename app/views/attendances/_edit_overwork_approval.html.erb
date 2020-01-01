@@ -69,6 +69,65 @@
           <% end %><!-- form_with -->
         <% end %><!-- @user_id == 2 -->
         
+        <% if @user.id == 3 %>
+          <%= form_with(model: @user, url: update_overwork_approval_user_attendance_path(@user.id), local: true, method: :patch) do |f| %>
+            <%= render 'shared/error_messages', object: @user %>
+              <% @overwork_applicationsB.each do |name, applications| %>
+              <table class="table table-bordered table-striped table-approval">
+                  <p>【 <%= name %> からの残業申請】</p>
+                <thead>
+                  <tr>
+                    <th>日付</th>
+                    <th>曜日</th>
+                    <th>終了予定時間</th>
+                    <th>指定勤務終了時間</th>
+                    <th>時間外時間</th>
+                    <th>業務処理内容</th>
+                    <th>指示者確認㊞</th>
+                    <th>変更</th>
+                    <th>勤怠を確認する</th>
+                  </tr>
+                </thead>
+                        
+                <tbody>
+                <% applications.each do |application| %>
+                  <%= fields_for("application[]", application) do |f| %>
+                    <tr>
+                      <td><%= l(application.worked_on, format: :short) %></td>
+                      <td><%= $days_of_the_week[application.worked_on.wday] %></td>
+                      <td><%= l(application.scheduled_end_time, format: :time) %></td>
+                      <td><%= format_basic_info(@user.designated_work_end_time) %></td>
+                      <td>
+                        <% if application.scheduled_end_time.present? %>
+                          <% if application.next_day == true %>
+                            <%= format_basic_info(application.scheduled_end_time).to_f + format_basic_info(@user.designated_work_end_time - 12.hour).to_f %>
+                          <% else %>
+                            <%= format_basic_info(application.scheduled_end_time).to_f - format_basic_info(@user.designated_work_end_time).to_f %>
+                          <% end %>
+                        <% end %>
+                      </td>
+                      <td><%= application.work_description %></td>
+                      <td>
+                        <%= f.select :application_state, Attendance.application_states.keys.to_a, { include_blank: false }, class: "form-control" %>
+                      </td>
+                      <td></td>
+                      <td>
+                        <%= link_to "確認", check_user_path(application.user_id), class: "btn btn-primary" %>
+                      </td>
+                    </tr>
+                  <% end %><!-- fields_for -->
+                <% end %><!-- applications.each do -->
+                </tbody>
+              </table>
+              
+         
+              <% end %><!-- @overwork_applicationsB -->
+            <div class="center">
+              <%= f.submit "申請を反映する", class: "btn btn-primary btn-block" %>
+            </div>
+          <% end %><!-- form_with -->
+        <% end %><!-- @user_id == 3 -->
+        
         </div>
       </div>
     </div>

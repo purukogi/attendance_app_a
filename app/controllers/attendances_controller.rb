@@ -73,8 +73,6 @@ class AttendancesController < ApplicationController
     @youbi = %w{日 月 火 水 木 金 土}
     # 上長Ａあての残業申請を全て取得
     @applications_to_A = Attendance.where(authorizer_user_id: "上長Ａ", application_state: "申請中")
-    # 上長Ａに残業申請を送っていないユーザーは除外
-    # @applications_to_A = @applications_to_A.select{ |x| !User.find_by(id: x.authorizer_user_id).nil? }
     # 名前ごとに分類
     @overwork_applicationsA = @applications_to_A.group_by do |application|
       User.find_by(id: application.user_id).name
@@ -82,12 +80,21 @@ class AttendancesController < ApplicationController
     
     # 上長Ｂあての残業申請を全て取得
     @applications_to_B = Attendance.where(authorizer_user_id: "上長Ｂ", application_state: "申請中")
+    # 名前ごとに分類
+    @overwork_applicationsB = @applications_to_B.group_by do |application|
+      User.find_by(id: application.user_id).name
+    end
   end
   
   def update_overwork_approval
     @user = User.find(params[:id])
     
     if @user.id == 2
+      params[:application].each do |id, item|
+      @attendance = Attendance.find(id)
+      @attendance.update_attributes(item.permit(:application_state))
+      end
+    elsif @user.id == 3
       params[:application].each do |id, item|
       @attendance = Attendance.find(id)
       @attendance.update_attributes(item.permit(:application_state))
