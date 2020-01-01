@@ -9,11 +9,15 @@
     <div class="modal-body">
       <div class="row">
         <div class="col-md-12">
+          
+        <% if @user.id == 2 %>  
           <%= form_with(model: @user, url: update_onemonth_approval_user_path(@user), local: true, method: :patch) do |f| %>
             <%= render 'shared/error_messages', object: @user %>
             
-              <p><%= @user.name %>からの1ヵ月分勤怠申請</p>
+            <% @monthwork_applicationsA.each do |name, applications| %>
+            
               <table class="table table-bordered table-striped table-approval">
+                <p><%= name %>からの勤怠申請</p>
                 <thead>
                   <tr>
                     <th>月</th>
@@ -24,19 +28,26 @@
                 </thead>
                 
                 <tbody>
-                  <tr>
-                  <td><%= @day.month %>月</td>
-                  <td><%= f.select :onemonth_application_state, User.onemonth_application_states.keys.to_a, { include_blank: false }, class: "form-control" %></td>
-                  <td></td>
-                  <td></td>
-                  </tr>
+                  <% applications.each do |application| %>
+                    <tr>
+                      <td><%= application.application_month %></td>
+                      <td><%= f.select :onemonth_application_state, User.onemonth_application_states.keys.to_a, { include_blank: false }, class: "form-control" %></td>
+                      <td></td>
+                      <td></td>
+                    </tr>
+                  <% end %><!-- applications.each do -->
                 </tbody>
               </table>
+              
+            <% end %><!-- @monthwork_applicationsA -->
          
           <div class="center">
           <%= f.submit "申請を反映する", class: "btn btn-primary btn-block" %>
           </div>
-          <% end %>
+          <% end %><!-- form_with -->
+          
+      <% end %><!-- @user.id == 2 -->
+      
         </div>
       </div>
     </div>

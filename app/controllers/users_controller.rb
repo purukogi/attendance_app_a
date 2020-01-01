@@ -29,7 +29,7 @@ class UsersController < ApplicationController
     # 一日分の残業申請を行った勤怠データを取得
     @applications_to_A = Attendance.where(authorizer_user_id: "上長Ａ", application_state: "申請中")
     @applications_to_B = Attendance.where(authorizer_user_id: "上長Ｂ", application_state: "申請中")
-    # 一ヵ月分の残業申請を行った勤怠データを取得
+    # 一ヵ月分の勤怠申請を行った勤怠データを取得
     @month_applications_A = User.where(month_authorizer: "上長Ａ", onemonth_application_state: "申請中")
     @month_applications_B = User.where(month_authorizer: "上長Ｂ", onemonth_application_state: "申請中")
     # 勤怠変更を行った勤怠データを取得
@@ -123,6 +123,7 @@ class UsersController < ApplicationController
   
   def onemonth_apply
     @user = User.find(params[:id])
+    
       if @user.update_attributes(onemonth_apply_params)
         flash[:success] = "今月の勤怠を申請しました"
         redirect_to @user
@@ -134,7 +135,14 @@ class UsersController < ApplicationController
   
   def onemonth_approval
     @user = User.find(params[:id])
-    @day = Date.parse(params[:date])
+    # 上長Ａあての１ヵ月勤怠申請を全て取得
+    @month_applications_A = User.where(month_authorizer: "上長Ａ", onemonth_application_state: "申請中")
+    # 名前ごとに分類
+    @monthwork_applicationsA = @month_applications_A.group_by do |application|
+      User.find_by(id: application.id).name
+    end
+    # 上長Ｂあての１ヵ月勤怠申請を全て取得
+    @month_applications_B = User.where(month_authorizer: "上長Ｂ", onemonth_application_state: "申請中")
   end
   
   def update_onemonth_approval
@@ -152,7 +160,7 @@ class UsersController < ApplicationController
     end
     
     def onemonth_apply_params
-      params.require(:user).permit(:month_authorizer, :onemonth_application_state)
+      params.require(:user).permit(:month_authorizer, :onemonth_application_state, :application_month)
     end
     
     
