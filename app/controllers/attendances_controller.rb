@@ -102,7 +102,7 @@ class AttendancesController < ApplicationController
     @user = User.find(params[:user_id])
     @youbi = %w{日 月 火 水 木 金 土}
     # 上長Ａあての勤怠申請を全て取得
-    @applications_to_A = Attendance.where(change_authorizer: "上長A")
+    @applications_to_A = Attendance.where(change_authorizer: "上長A", application_edit_state: "なし　")
     # 名前ごとに分類
     @changework_applicationsA = @applications_to_A.group_by do |application|
     User.find_by(id: application.user_id).name
@@ -110,6 +110,13 @@ class AttendancesController < ApplicationController
   end
   
   def update_changework_approval
+    @user = User.find(params[:id])
+      params[:application].each do |id, item|
+      @attendance = Attendance.find(id)
+      @attendance.update_attributes(item.permit(:application_edit_state, :check))
+      end
+      flash[:success] = "申請を承認 or 否認しました。"
+      redirect_to @user
   end
   
   
@@ -127,6 +134,7 @@ class AttendancesController < ApplicationController
     def overwork_approval_params
       params.permit(:application_state)
     end
+   
  
 
     # beforeフィルター

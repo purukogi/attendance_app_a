@@ -33,8 +33,8 @@ class UsersController < ApplicationController
     @month_applications_A = User.where(month_authorizer: "上長Ａ", onemonth_application_state: "申請中")
     @month_applications_B = User.where(month_authorizer: "上長Ｂ", onemonth_application_state: "申請中")
     # 勤怠変更を行った勤怠データを取得
-    @edit_applications_A = Attendance.where(change_authorizer: "上長A")
-    @edit_applications_B = Attendance.where(change_authorizer: "上長B")
+    @edit_applications_A = Attendance.where(change_authorizer: "上長A", application_edit_state: "なし　")
+    @edit_applications_B = Attendance.where(change_authorizer: "上長B", application_edit_state: "なし　")
     
   end
   
