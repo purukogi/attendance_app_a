@@ -93,7 +93,7 @@ class AttendancesController < ApplicationController
       @attendance = Attendance.find(id)
       @attendance.update_attributes(item.permit(:application_state, :check))
       end
-      flash[:success] = "申請を承認 or 否認しました。"
+      flash[:success] = "勤怠変更申請を承認 or 否認しました。"
       redirect_to @user
   end
            

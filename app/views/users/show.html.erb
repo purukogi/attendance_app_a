@@ -179,6 +179,20 @@
               <%= "残業承認済" %>
             <% elsif day.authorizer_user_id == "上長Ｂ" && day.application_state == "否認" %>
               <%= "残業否認" %>
+            <% end %><br>
+            
+             <% if day.change_authorizer == "上長A" && day.application_edit_state == "なし　" %>
+              <%= "上長Ａに勤怠変更申請中" %>
+            <% elsif day.change_authorizer == "上長A" && day.application_edit_state == "承認　" %>
+              <%= "勤怠変更承認済" %>
+            <% elsif day.change_authorizer == "上長A" && day.application_edit_state == "否認　" %>
+              <%= "勤怠変更否認" %>
+            <% elsif day.change_authorizer == "上長B" && day.application_edit_state == "なし　" %>
+              <%= "上長Ｂに勤怠変更申請中" %>
+            <% elsif day.change_authorizer == "上長B" && day.application_edit_state == "承認　" %>
+              <%= "勤怠変更承認済" %>
+            <% elsif day.change_authorizer == "上長B" && day.application_edit_state == "否認　" %>
+              <%= "勤怠変更否認" %>
             <% end %>
           </td>
         </tr>
