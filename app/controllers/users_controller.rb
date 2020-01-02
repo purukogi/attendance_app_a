@@ -118,9 +118,6 @@ class UsersController < ApplicationController
     @users = User.all.includes(:attendances)
   end
   
-  def attendances_edit_log
-  end
-  
   def onemonth_apply
     @user = User.find(params[:id])
     
@@ -147,6 +144,11 @@ class UsersController < ApplicationController
   
   def update_onemonth_approval
     @user = User.find(params[:id])
+  end
+  
+  def attendances_edit_log
+    @user = User.find(params[:id])
+    @edit_data = Attendance.where(application_edit_state: "承認　")
   end
   
   private # strongparameterの設定

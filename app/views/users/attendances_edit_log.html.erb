@@ -2,14 +2,47 @@
 
 <table class="table table-bordered table-condensed user-table">
     
-<tr>
-<td><b>日付</b></td>
-<td><b>変更前出社時間</b></td>
-<td><b>変更前退社時間</b></td>
-<td><b>変更後出社時間</b></td>
-<td><b>変更後退社時間</b></td>
-<td><b>指示者</b></td>
-<td><b>承認日</b></td>
-</tr>
+  <tr>
+    <th class="center">日付</th>
+    <th class="center">変更前出社時間</th>
+    <th class="center">変更前退社時間</th>
+    <th class="center">変更後出社時間</th>
+    <th class="center">変更後退社時間</th>
+    <th class="center">承認者</th>
+  </tr>
+  
+  
+  <% @edit_data.each do |data| %>
+  <% if @user.id == data.user_id %>
+  <tr>
+    <td><%= l(data.worked_on, format: :short) %></td>
+    <td>
+        <% if data.started_at2.nil? %>
+        <% else %>
+          <%= data.started_at2.strftime('%H:%M') %>
+        <% end %>
+    </td>
+    <td>
+        <% if data.started_at2.nil? %>
+        <% else %>
+          <%= data.finished_at2.strftime('%H:%M') %>
+        <% end %>
+    </td>
+    <td>
+        <% if data.started_at.nil? %>
+        <% else %>
+          <%= data.started_at.strftime('%H:%M') %>
+        <% end %>
+    </td>
+    <td>
+        <% if data.finished_at.nil? %>
+        <% else %>
+          <%= data.finished_at.strftime('%H:%M') %>
+        <% end %>
+    </td>
+    <td><%= data.change_authorizer %></td>
+  </tr>
+  <% end %>
+  <% end %>
 
 </table>
