@@ -30,7 +30,7 @@
                 <tbody>
                   <% applications.each do |application| %>
                     <tr>
-                      <td><%= application.application_month %></td>
+                      <td><%= application.application_month.month %>月</td>
                       <td><%= f.select :onemonth_application_state, User.onemonth_application_states.keys.to_a, { include_blank: false }, class: "form-control" %></td>
                       <td></td>
                       <td></td>
