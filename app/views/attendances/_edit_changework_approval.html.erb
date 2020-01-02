@@ -54,14 +54,14 @@
                     <tr>
                       <td><%= l(application.worked_on, format: :short) %></td>
                       <td><%= $days_of_the_week[application.worked_on.wday] %></td>
-                      <td><%= l(application.started_at, format: :hour) %></td>
-                      <td><%= l(application.started_at, format: :min) %></td>
+                      <td><%= l(application.started_at2, format: :hour) %></td>
+                      <td><%= l(application.started_at2, format: :min) %></td>
                       <td><%= l(application.finished_at, format: :hour) %></td>
                       <td><%= l(application.finished_at, format: :min) %></td>
                       <td><%= l(application.started_at, format: :hour) %></td>
                       <td><%= l(application.started_at, format: :min) %></td>
                       <td><%= l(application.finished_at, format: :hour) %></td>
-                      <td><%= l(application.started_at, format: :min) %></td>
+                      <td><%= l(application.finished_at, format: :min) %></td>
                       <td><%= application.note %></td>
                       <td><%= f.select :application_edit_state, Attendance.application_edit_states.keys.to_a, { include_blank: false }, class: "form-control" %></td>
                       <td></td>

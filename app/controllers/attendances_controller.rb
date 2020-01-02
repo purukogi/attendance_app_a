@@ -13,7 +13,8 @@ class AttendancesController < ApplicationController
     @attendance = Attendance.find(params[:id])
     # 出勤時間が未登録であることを判定します。
     if @attendance.started_at.nil?
-      if @attendance.update_attributes(started_at: Time.current.change(sec: 0))
+      if @attendance.update_attributes(started_at: Time.current.change(sec: 0), started_at2: Time.current.change(sec: 0))
+        
         flash[:info] = "おはようございます！"
       else
         flash[:danger] = UPDATE_ERROR_MSG
@@ -116,7 +117,7 @@ class AttendancesController < ApplicationController
 
     # 1ヶ月分の勤怠情報を扱います。
     def attendances_params
-      params.require(:user).permit(attendances: [:started_at, :finished_at, :note, :change_authorizer, :application_edit_state])[:attendances]
+      params.require(:user).permit(attendances: [:started_at, :started_at2, :finished_at, :note, :change_authorizer, :application_edit_state])[:attendances]
     end
     
     def overwork_request_params
