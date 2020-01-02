@@ -52,18 +52,18 @@
                 <% applications.each do |application| %>
                   <%= fields_for("application[]", application) do |f| %>
                     <tr>
-                      <td>日付</td>
-                      <td>曜日</td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
+                      <td><%= l(application.worked_on, format: :short) %></td>
+                      <td><%= $days_of_the_week[application.worked_on.wday] %></td>
+                      <td><%= l(application.started_at, format: :hour) %></td>
+                      <td><%= l(application.started_at, format: :min) %></td>
+                      <td><%= l(application.finished_at, format: :hour) %></td>
+                      <td><%= l(application.finished_at, format: :min) %></td>
+                      <td><%= l(application.started_at, format: :hour) %></td>
+                      <td><%= l(application.started_at, format: :min) %></td>
+                      <td><%= l(application.finished_at, format: :hour) %></td>
+                      <td><%= l(application.started_at, format: :min) %></td>
+                      <td><%= application.note %></td>
+                      <td><%= f.select :application_edit_state, Attendance.application_edit_states.keys.to_a, { include_blank: false }, class: "form-control" %></td>
                       <td></td>
                       <td>
                         <%= link_to "確認", check_user_path(application.user_id), class: "btn btn-primary" %>
