@@ -20,7 +20,7 @@ class AttendancesController < ApplicationController
         flash[:danger] = UPDATE_ERROR_MSG
       end
     elsif @attendance.finished_at.nil?
-      if @attendance.update_attributes(finished_at: Time.current.change(sec: 0))
+      if @attendance.update_attributes(finished_at: Time.current.change(sec: 0), finished_at2: Time.current.change(sec: 0))
         flash[:info] = "お疲れ様でした。"
       else
         flash[:danger] = UPDATE_ERROR_MSG
@@ -117,7 +117,7 @@ class AttendancesController < ApplicationController
 
     # 1ヶ月分の勤怠情報を扱います。
     def attendances_params
-      params.require(:user).permit(attendances: [:started_at, :started_at2, :finished_at, :note, :change_authorizer, :application_edit_state])[:attendances]
+      params.require(:user).permit(attendances: [:started_at, :started_at2, :finished_at, :finished_at2, :note, :change_authorizer, :application_edit_state])[:attendances]
     end
     
     def overwork_request_params
