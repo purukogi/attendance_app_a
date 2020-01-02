@@ -1,0 +1,68 @@
+<div class="modal-dialog modal-lg modal-dialog-center">
+  <div class="modal-content">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+      <h4 class="modal-title"></h4>
+    </div>
+    <div class="modal-body">
+      <div class="row">
+        <div class="col-md-12">
+          
+        <% if @user.id == 2 %>
+          <%= form_with(model: @user, url: update_changework_approval_user_attendance_path(@user.id), local: true, method: :patch) do |f| %>
+            <%= render 'shared/error_messages', object: @user %>
+              <% @changework_applicationsA.each do |name, applications| %>
+              <table class="table table-bordered table-striped table-approval">
+                  <p>【 <%= name %> からの残業申請】</p>
+                <thead>
+                  <tr>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                  </tr>
+                </thead>
+                        
+                <tbody>
+                <% applications.each do |application| %>
+                  <%= fields_for("application[]", application) do |f| %>
+                    <tr>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td>
+                        <%= link_to "確認", check_user_path(application.user_id), class: "btn btn-primary" %>
+                      </td>
+                    </tr>
+                  <% end %><!-- fields_for -->
+                <% end %><!-- applications.each do -->
+                </tbody>
+              </table>
+              
+         
+              <% end %><!-- @overwork_applicationsA -->
+            <div class="center">
+              <%= f.submit "申請を反映する", class: "btn btn-primary btn-block" %>
+            </div>
+          <% end %><!-- form_with -->
+        <% end %><!-- @user_id == 2 -->
+        
+      
+        
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

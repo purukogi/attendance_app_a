@@ -47,6 +47,8 @@ Rails.application.routes.draw do
         patch 'update_overwork_request'
         get 'edit_overwork_approval'
         patch 'update_overwork_approval'
+        get 'edit_changework_approval'
+        patch 'update_changework_approval'
       end
     end
   end

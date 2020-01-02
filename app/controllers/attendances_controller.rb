@@ -96,10 +96,20 @@ class AttendancesController < ApplicationController
       redirect_to @user
   end
            
-    # @applying = Attendance.where(authorizer_user_id: "上長Ａ")
-    # @applying.update_all(:application_state => 'なし')
-    # @approval = Attendance.where(authorizer_user_id: "上長Ａ", application_state: "承認")
-    # @approval.update_all(:application_state => '承認')
+  def edit_changework_approval
+    @attendance = Attendance.find(params[:id])
+    @user = User.find(params[:user_id])
+    @youbi = %w{日 月 火 水 木 金 土}
+    # 上長Ａあての勤怠申請を全て取得
+    @applications_to_A = Attendance.where(change_authorizer: "上長A")
+    # 名前ごとに分類
+    @changework_applicationsA = @applications_to_A.group_by do |application|
+    User.find_by(id: application.user_id).name
+    end
+  end
+  
+  def update_changework_approval
+  end
   
   
   private
