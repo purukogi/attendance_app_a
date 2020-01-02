@@ -107,6 +107,12 @@ class AttendancesController < ApplicationController
     @changework_applicationsA = @applications_to_A.group_by do |application|
     User.find_by(id: application.user_id).name
     end
+    # 上長Ｂあての勤怠申請を全て取得
+    @applications_to_B = Attendance.where(change_authorizer: "上長B", application_edit_state: "なし　")
+    # 名前ごとに分類
+    @changework_applicationsB = @applications_to_B.group_by do |application|
+    User.find_by(id: application.user_id).name
+    end
   end
   
   def update_changework_approval
@@ -115,7 +121,7 @@ class AttendancesController < ApplicationController
       @attendance = Attendance.find(id)
       @attendance.update_attributes(item.permit(:application_edit_state, :check))
       end
-      flash[:success] = "申請を承認 or 否認しました。"
+      flash[:success] = "勤怠変更申請を承認 or 否認しました。"
       redirect_to @user
   end
   

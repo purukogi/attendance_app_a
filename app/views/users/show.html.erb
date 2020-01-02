@@ -48,7 +48,7 @@
       <%= link_to "【勤怠変更申請のお知らせ】", edit_changework_approval_user_attendance_path(@user), remote: true %>
       <span style="border: 2px solid red; color: red;"><%= "#{@edit_applications_A.count}件の通知があります" %></span><br>
     <% elsif @user.id == 3 && @edit_applications_B.count > 0 %>
-      <%= link_to "【勤怠変更申請のお知らせ】", edit_changework_approval_user_attendance(@user), remote: true %>
+      <%= link_to "【勤怠変更申請のお知らせ】", edit_changework_approval_user_attendance_path(@user), remote: true %>
       <span style="border: 2px solid red; color: red;"><%= "#{@edit_applications_B.count}件の通知があります" %></span><br>
     <% else %>
      【勤怠変更申請のお知らせ】<br>

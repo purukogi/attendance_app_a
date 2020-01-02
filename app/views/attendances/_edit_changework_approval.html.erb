@@ -102,7 +102,97 @@
           <% end %><!-- form_with -->
         <% end %><!-- @user_id == 2 -->
         
-      
+        <% if @user.id == 3 %>
+          <%= form_with(model: @user, url: update_changework_approval_user_attendance_path(@user.id), local: true, method: :patch) do |f| %>
+            <%= render 'shared/error_messages', object: @user %>
+              <% @changework_applicationsB.each do |name, applications| %>
+              <table class="table table-bordered table-striped table-approval">
+                  <p>【 <%= name %> からの勤怠変更申請】</p>
+                <thead>
+                  <tr>
+                    <th rowspan="3">日付</th>
+                    <th rowspan="3">曜日</th>
+                    <th colspan="4">変更前</th>
+                    <th colspan="4">変更後</th>
+                    <th rowspan="3">備考</th>
+                    <th rowspan="3">指示者確認㊞</th>
+                    <th rowspan="3">変更</th>
+                    <th rowspan="3">勤怠を確認する</th>
+                  </tr>
+                  
+                  <tr>
+                    <th colspan="2">出社</th>
+                    <th colspan="2">退社</th>
+                    <th colspan="2">出社</th>
+                    <th colspan="2">退社</th>
+                  </tr>
+                  
+                  <tr>
+                    <th>時</th>
+                    <th>分</th>
+                    <th>時</th>
+                    <th>分</th>
+                    <th>時</th>
+                    <th>分</th>
+                    <th>時</th>
+                    <th>分</th>
+                  </tr>
+                  
+                </thead>
+                        
+                <tbody>
+                <% applications.each do |application| %>
+                  <%= fields_for("application[]", application) do |f| %>
+                    <tr>
+                      <td><%= l(application.worked_on, format: :short) %></td>
+                      <td><%= $days_of_the_week[application.worked_on.wday] %></td>
+                      <td>
+                        <% if application.started_at2.nil? %>
+                        <% else %>
+                          <%= l(application.started_at2, format: :hour) %>
+                        <% end %>
+                      </td>
+                      <td>
+                        <% if application.started_at2.nil? %>
+                        <% else %>
+                          <%= l(application.started_at2, format: :min) %>
+                        <% end %>
+                      </td>
+                      <td>
+                        <% if application.finished_at2.nil? %>
+                        <% else %>
+                          <%= l(application.finished_at2, format: :hour) %>
+                        <% end %>
+                      </td>
+                      <td>
+                        <% if application.finished_at2.nil? %>
+                        <% else %>
+                          <%= l(application.finished_at2, format: :min) %>
+                        <% end %>
+                      </td>
+                      <td><%= l(application.started_at, format: :hour) %></td>
+                      <td><%= l(application.started_at, format: :min) %></td>
+                      <td><%= l(application.finished_at, format: :hour) %></td>
+                      <td><%= l(application.finished_at, format: :min) %></td>
+                      <td><%= application.note %></td>
+                      <td><%= f.select :application_edit_state, Attendance.application_edit_states.keys.to_a, { include_blank: false }, class: "form-control" %></td>
+                      <td><%= f.check_box :check %></td>
+                      <td>
+                        <%= link_to "確認", check_user_path(application.user_id), class: "btn btn-primary" %>
+                      </td>
+                    </tr>
+                  <% end %><!-- fields_for -->
+                <% end %><!-- applications.each do -->
+                </tbody>
+              </table>
+              
+         
+              <% end %><!-- @overwork_applicationsB -->
+            <div class="center">
+              <%= f.submit "申請を反映する", class: "btn btn-primary btn-block" %>
+            </div>
+          <% end %><!-- form_with -->
+        <% end %><!-- @user_id == 3 -->
         
         </div>
       </div>
