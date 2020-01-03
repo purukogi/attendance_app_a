@@ -51,6 +51,8 @@
                   <%= af.select :change_authorizer, Attendance.change_authorizers.keys.to_a, { include_blank: true, disabled: "上長A" }, class: "form-control" %>
                 <% elsif @user.id == 3 %>
                   <%= af.select :change_authorizer, Attendance.change_authorizers.keys.to_a, { include_blank: true, disabled: "上長B" }, class: "form-control" %>
+                <% else %>
+                  <%= af.select :change_authorizer, Attendance.change_authorizers.keys.to_a, { include_blank: true }, class: "form-control" %>
                 <% end %>
               </td>
               <td><%= af.select :application_edit_state, Attendance.application_edit_states.keys.to_a, { include_blank: false },  class: "form-control" %></td>

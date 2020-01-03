@@ -225,7 +225,13 @@
             </p>
               
             <p>
-            <%= f.select :month_authorizer, User.month_authorizers.keys.to_a, { include_blank: true }, class: "form-control" %>
+              <% if @user.id == 2 %>
+                <%= f.select :month_authorizer, User.month_authorizers.keys.to_a, { include_blank: true, disabled: "上長Ａ" }, class: "form-control" %>
+              <% elsif @user.id == 3 %>
+                <%= f.select :month_authorizer, User.month_authorizers.keys.to_a, { include_blank: true, disabled: "上長Ｂ" }, class: "form-control" %>
+              <% else %>
+                <%= f.select :month_authorizer, User.month_authorizers.keys.to_a, { include_blank: true }, class: "form-control" %>
+              <% end %>
             </p>
             <%= f.hidden_field :application_month, {value: @first_day} %>
             <%= f.hidden_field :onemonth_application_state, {value: '申請中'} %>

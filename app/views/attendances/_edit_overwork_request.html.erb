@@ -33,7 +33,13 @@
                   <td><%= f.check_box :next_day %></td>
                   <td><%= f.text_field :work_description, class: "form-control" %></td>
                   <td>
-                    <%= f.select :authorizer_user_id, Attendance.authorizer_user_ids.keys.to_a, { include_blank: true }, class: "form-control" %>
+                    <% if @user.id == 2 %>
+                      <%= f.select :authorizer_user_id, Attendance.authorizer_user_ids.keys.to_a, { include_blank: true, disabled: "上長Ａ" }, class: "form-control" %>
+                    <% elsif @user.id == 3 %>
+                      <%= f.select :authorizer_user_id, Attendance.authorizer_user_ids.keys.to_a, { include_blank: true, disabled: "上長Ｂ" }, class: "form-control" %>
+                    <% else %>
+                      <%= f.select :authorizer_user_id, Attendance.authorizer_user_ids.keys.to_a, { include_blank: true }, class: "form-control" %>
+                    <% end %>
                   </td>
                 </tr>
               </tbody>
