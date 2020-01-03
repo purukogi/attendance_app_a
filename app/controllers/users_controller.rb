@@ -122,11 +122,13 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     
       if @user.update_attributes(onemonth_apply_params)
-        flash[:success] = "今月の勤怠を申請しました"
-        redirect_to @user
-      else
-        flash[:danger] = "勤怠申請は失敗しました。"
-        redirect_to @user
+        if @user.month_authorizer.present?
+          flash[:success] = "今月の勤怠を申請しました"
+          redirect_to @user
+        else
+          flash[:danger] = "所属長を選択してください"
+          redirect_to @user
+        end  
       end
   end
   
@@ -153,7 +155,7 @@ class UsersController < ApplicationController
   
   def attendance
     @user = User.find(params[:id])
-    @attendances = @user.attendances.where(application_edit_state: "承認　")
+    # @attendances = @user.attendances.where.not(change_authorizer:"上長A ,上長B" , application_edit_state: "なし　")
   end
   
   private # strongparameterの設定

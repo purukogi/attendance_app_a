@@ -15,7 +15,7 @@ require 'csv'
       attendance.note
     ]
 
-   else
+  else
     column_values = [
       attendance.worked_on.strftime("%m/%d"),
       attendance.started_at.strftime('%H:%M'),
