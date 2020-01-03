@@ -40,6 +40,8 @@ Rails.application.routes.draw do
       patch 'update_onemonth_approval'
       # 勤怠確認ページ
       get 'check'
+      # CSV出力
+      get 'attendance'
     end
     resources :attendances do
       member do

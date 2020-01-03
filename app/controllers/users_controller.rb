@@ -151,6 +151,11 @@ class UsersController < ApplicationController
     @edit_data = Attendance.where(application_edit_state: "承認　")
   end
   
+  def attendance
+    @user = User.find(params[:id])
+    @attendances = @user.attendances.where(application_edit_state: "承認　")
+  end
+  
   private # strongparameterの設定
 
     def user_params
