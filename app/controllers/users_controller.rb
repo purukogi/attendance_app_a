@@ -146,6 +146,13 @@ class UsersController < ApplicationController
   
   def update_onemonth_approval
     @user = User.find(params[:id])
+    
+      params[:application].each do |id, item|
+      @attendance = User.find(id)
+      @attendance.update_attributes(item.permit(:onemonth_application_state, :check))
+      end
+      flash[:success] = "1ヵ月の勤怠申請を承認 or 否認しました。"
+      redirect_to @user
   end
   
   def attendances_edit_log
