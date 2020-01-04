@@ -217,8 +217,16 @@
             <p>
               <% if @user.onemonth_application_state == "申請中" && @user.month_authorizer == "上長Ａ" %>
               所属長承認　上長Ａに申請中
+              <% elsif @user.onemonth_application_state == "承認" && @user.month_authorizer == "上長Ａ" %>
+              所属長承認　承認済
+              <% elsif @user.onemonth_application_state == "否認" && @user.month_authorizer == "上長Ａ" %>
+              所属長承認　否認
               <% elsif @user.onemonth_application_state == "申請中" && @user.month_authorizer == "上長Ｂ" %>
               所属長承認　上長Ｂに申請中
+              <% elsif @user.onemonth_application_state == "承認" && @user.month_authorizer == "上長Ｂ" %>
+              所属長承認　承認済
+              <% elsif @user.onemonth_application_state == "否認" && @user.month_authorizer == "上長Ｂ" %>
+              所属長承認　否認
               <% else %>
               所属長申請　未
               <% end %>
