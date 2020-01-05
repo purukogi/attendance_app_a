@@ -23,6 +23,12 @@ class Attendance < ApplicationRecord
     errors.add(:started_at, "が必要です") if started_at.blank? && finished_at.present?
   end
   
+  validate :overtime_invalid
+  
+  def overtime_invalid #残業申請フォームのバリデート
+    errors.add(:scheduled_end_time, "が必要です") if scheduled_end_time.blank? || authorizer_user_id.blank?
+  end
+  
   # 出勤・退勤時間どちらも存在する時、出勤時間より早い退勤時間は無効 ：カスタムバリデートを定義
   # validate :started_at_than_finished_at_fast_if_invalid
 
