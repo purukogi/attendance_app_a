@@ -33,9 +33,9 @@ module AttendancesHelper
       elsif item[:started_at].blank? || item[:finished_at].blank?
         attendances = false
         break
-      elsif item[:started_at] > item[:finished_at]
-        attendances = false
-        break
+      # elsif item[:started_at] > item[:finished_at]
+      #   attendances = false
+      #   break
       end
     end
     return attendances

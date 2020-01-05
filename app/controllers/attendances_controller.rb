@@ -39,6 +39,11 @@ class AttendancesController < ApplicationController
     if attendances_invalid?
       attendances_params.each do |id, item|
         attendance = Attendance.find(id)
+        attendance.update_attributes(item.permit(:next_day))
+          if attendance.next_day == true
+            attendance.finished_at+1.day
+          else
+          end
         attendance.update_attributes(item)
       end
       flash[:success] = "勤怠情報を更新しました。"
@@ -94,11 +99,11 @@ class AttendancesController < ApplicationController
     @attendance = Attendance.find(id)
     @attendance.update_attributes(item.permit(:check))
     
-     if @attendance.check == true
-     @attendance.update_attributes(item.permit(:application_state))
-     elsif @attendance.check == false
-     @attendance.update_attributes(item.permit(:check))
-     end
+      if @attendance.check == true
+        @attendance.update_attributes(item.permit(:application_state))
+      elsif @attendance.check == false
+        @attendance.update_attributes(item.permit(:check))
+      end
     
     end
     
@@ -146,7 +151,7 @@ class AttendancesController < ApplicationController
 
     # 1ヶ月分の勤怠情報を扱います。
     def attendances_params
-      params.require(:user).permit(attendances: [:started_at, :started_at2, :finished_at, :finished_at2, :note, :change_authorizer, :application_edit_state])[:attendances]
+      params.require(:user).permit(attendances: [:started_at, :started_at2, :finished_at, :finished_at2, :note, :change_authorizer, :application_edit_state, :next_day])[:attendances]
     end
     
     def overwork_request_params

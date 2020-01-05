@@ -145,9 +145,14 @@
           <td><%= l(day.finished_at, format: :hour) if day.finished_at.present? %></td><!-- 退社の時 -->
           <td><%= l(day.finished_at.floor_to(15.minutes), format: :min) if day.finished_at.present? %></td><!-- 退社の分 -->
         
-          <td>
+          <td><!-- 在社時間 -->
             <% if day.started_at.present? && day.finished_at.present? %>
+              <% if day.next_day? %>
+                <% day.finished_at = day.finished_at+1.day %>
+              <% else %>
+              <% end %>
               <%= str_times = working_times(day.started_at.floor_to(15.minutes), day.finished_at.floor_to(15.minutes)) %>
+              
               <% @total_working_times = @total_working_times.to_f + str_times.to_f %>
             <% end %>
           </td>
