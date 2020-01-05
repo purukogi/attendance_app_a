@@ -39,7 +39,7 @@
                 <td><%= af.time_field :finished_at, class: "form-control" %></td>
               <% end %>
               
-              <td><%= af.check_box :next_day %></td>
+              <td><%= af.check_box :next_day2 %></td>
               <td>
                 <% if day.started_at.present? && day.finished_at.present? %>
                   <% if day.next_day? %>
