@@ -10,7 +10,7 @@ class Attendance < ApplicationRecord
   enum application_edit_state: { "なし　" => 0, "申請中　" => 1, "承認　" => 2, "否認　" => 3 }
   # 勤怠変更の承認者選択
   enum change_authorizer: { "上長A" => 1, "上長B" => 2 }
-
+  
 
   validates :worked_on, presence: true
   validates :note, length: { maximum: 50 }

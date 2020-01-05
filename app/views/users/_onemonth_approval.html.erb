@@ -33,7 +33,7 @@
                     <tr>
                       <td><%= application.application_month.month %>月</td>
                       <td><%= f.select :onemonth_application_state, User.onemonth_application_states.keys.to_a, { include_blank: false }, class: "form-control" %></td>
-                      <td></td>
+                      <td><%= f.check_box :check %></td>
                       <td><%= link_to "確認", check_user_path(application.id), class: "btn btn-primary" %></td>
                     </tr>
                     <% end %>

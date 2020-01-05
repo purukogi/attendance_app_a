@@ -89,12 +89,21 @@ class AttendancesController < ApplicationController
   
   def update_overwork_approval
     @user = User.find(params[:id])
-      params[:application].each do |id, item|
-      @attendance = Attendance.find(id)
-      @attendance.update_attributes(item.permit(:application_state, :check))
-      end
-      flash[:success] = "勤怠変更申請を承認 or 否認しました。"
-      redirect_to @user
+    params[:application].each do |id, item|
+    @attendance = Attendance.find(id)
+    @attendance.update_attributes(item.permit(:check))
+    
+     if @attendance.check == true
+       @attendance.update_attributes(item.permit(:application_state))
+     elsif @attendance.check == false
+       flash[:danger] = "チェックボックスをオンにしてください"
+     end
+    
+    # @attendance.update_attributes(item.permit(:application_state, :check))
+    end
+   
+    flash[:success] = "勤怠変更申請を承認 or 否認しました。"
+    redirect_to @user
   end
            
   def edit_changework_approval
