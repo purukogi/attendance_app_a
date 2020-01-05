@@ -49,7 +49,7 @@ class AttendancesController < ApplicationController
       flash[:success] = "勤怠情報を更新しました。"
       redirect_to user_path(@user, params:{first_day: params[:date]})
     else
-      flash[:danger] = "不正な時間入力がありました、再入力してください。"
+      flash[:danger] = "出社時間、退社時間、上長選択のいずれかが未入力です"
       redirect_to attendances_edit_one_month_user_url(date: params[:date])
     end
   end
