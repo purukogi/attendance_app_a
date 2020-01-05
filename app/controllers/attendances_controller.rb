@@ -39,8 +39,8 @@ class AttendancesController < ApplicationController
     if attendances_invalid?
       attendances_params.each do |id, item|
         attendance = Attendance.find(id)
-        attendance.update_attributes(item.permit(:next_day))
-        if attendance.next_day == true
+        attendance.update_attributes(item.permit(:next_day2))
+        if attendance.next_day2 == true
           attendance.finished_at+1.day
         else
         end

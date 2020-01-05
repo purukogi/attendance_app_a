@@ -14,7 +14,8 @@ class Attendance < ApplicationRecord
 
   validates :worked_on, presence: true
   validates :note, length: { maximum: 50 }
-
+  validates :scheduled_end_time, presence: true
+  validates :authorizer_user_id, presence: true
   
   # 出勤時間が存在しない場合、退勤時間は無効 ：カスタムバリデートを定義
   validate :finished_at_is_invalid_without_a_started_at
@@ -23,23 +24,15 @@ class Attendance < ApplicationRecord
     errors.add(:started_at, "が必要です") if started_at.blank? && finished_at.present?
   end
   
-  validate :overtime_invalid
-  
-  def overtime_invalid # 残業申請フォームのバリデート
-    errors.add(:scheduled_end_time, "が必要です") if scheduled_end_time.blank? || authorizer_user_id.blank?
-  end
-
-
-  
-  # 出勤・退勤時間どちらも存在する時、出勤時間より早い退勤時間は無効 ：カスタムバリデートを定義
-  # validate :started_at_than_finished_at_fast_if_invalid
-
-  # def started_at_than_finished_at_fast_if_invalid
-  # if started_at.present? && finished_at.present?
-  #   if !check?
-  #     errors.add(:started_at, "より早い退勤時間は無効です") if started_at > finished_at
-  #   end
-  # end
-  # end
-  
 end
+
+# 出勤・退勤時間どちらも存在する時、出勤時間より早い退勤時間は無効 ：カスタムバリデートを定義
+# validate :started_at_than_finished_at_fast_if_invalid
+
+# def started_at_than_finished_at_fast_if_invalid
+# if started_at.present? && finished_at.present?
+#   if !check?
+#     errors.add(:started_at, "より早い退勤時間は無効です") if started_at > finished_at
+#   end
+# end
+# end
