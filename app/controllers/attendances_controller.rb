@@ -128,10 +128,17 @@ class AttendancesController < ApplicationController
     @user = User.find(params[:id])
       params[:application].each do |id, item|
       @attendance = Attendance.find(id)
-      @attendance.update_attributes(item.permit(:application_edit_state, :check))
+      @attendance.update_attributes(item.permit(:check))
+      
+        if @attendance.check == true
+          @attendance.update_attributes(item.permit(:application_edit_state))
+        elsif @attendance.check == false
+          @attendance.update_attributes(item.permit(:check))
+        end
+        
       end
-      flash[:success] = "勤怠変更申請を承認 or 否認しました。"
-      redirect_to @user
+    flash[:success] = "勤怠変更申請を承認 or 否認しました。（※チェックボックスにチェックがついていない項目は反映されません）"
+    redirect_to @user
   end
   
   

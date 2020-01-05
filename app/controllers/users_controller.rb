@@ -149,9 +149,16 @@ class UsersController < ApplicationController
     
       params[:application].each do |id, item|
       @attendance = User.find(id)
-      @attendance.update_attributes(item.permit(:onemonth_application_state, :check))
+      @attendance.update_attributes(item.permit(:check))
+      
+        if @attendance.check == true
+          @attendance.update_attributes(item.permit(:onemonth_application_state))
+        elsif @attendance.check == false
+          @attendance.update_attributes(item.permit(:check))
+        end
+      
       end
-      flash[:success] = "1ヵ月の勤怠申請を承認 or 否認しました。"
+      flash[:success] = "1ヵ月の勤怠申請を承認 or 否認しました。（※チェックボックスにチェックがついていない項目は反映されません）"
       redirect_to @user
   end
   
