@@ -29,13 +29,13 @@ module AttendancesHelper
     attendances = true
     attendances_params.each do |id, item|
       if item[:started_at].blank? && item[:finished_at].blank?
-      #  next
-      # elsif item[:started_at].blank? || item[:finished_at].blank?
-      #   attendances = false
-      #   break
-      # elsif item[:change_authorizer].blank?
-      #   attendances = false
-      #   break
+        next
+      elsif item[:started_at].blank? || item[:finished_at].blank?
+        attendances = false
+        break
+      elsif item[:change_authorizer].blank?
+        attendances = false
+        break
       # elsif item[:started_at] > item[:finished_at]
       #   attendances = false
       #   break
