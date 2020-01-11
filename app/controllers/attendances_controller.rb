@@ -67,7 +67,7 @@ class AttendancesController < ApplicationController
         flash[:success] = "残業を申請しました"
         redirect_to @user
       else
-        flash[:danger] = "終了予定時間、もしくは上長の選択が未入力です"
+        flash[:danger] = "上長の選択が未入力です"
         redirect_to @user
       end
   end
