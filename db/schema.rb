@@ -58,6 +58,7 @@ ActiveRecord::Schema.define(version: 20200105081942) do
     t.string "uid"
     t.boolean "superior", default: false
     t.datetime "designated_work_end_time", default: "2020-01-12 09:00:00"
+    t.boolean "attendance_check", default: false
     t.integer "month_authorizer"
     t.integer "onemonth_application_state"
     t.date "application_month"
