@@ -169,7 +169,8 @@ class UsersController < ApplicationController
   
   def attendance
     @user = User.find(params[:id])
-    @attendances = @user.attendances.where.not(change_authorizer:"上長A ,上長B" , application_edit_state: "なし　")
+    # @attendances = @user.attendances.where.not(change_authorizer:"上長A ,上長B" , application_edit_state: "なし　")
+    @attendances = @user.attendances
   end
   
   private # strongparameterの設定

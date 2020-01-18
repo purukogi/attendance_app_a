@@ -24,7 +24,6 @@ class Attendance < ApplicationRecord
   def finished_at_is_invalid_without_a_started_at # 退勤時間のみ入力している場合のバリデート
     errors.add(:started_at, "が必要です") if started_at.blank? && finished_at.present?
   end
-  
 end
 
 # 出勤・退勤時間どちらも存在する時、出勤時間より早い退勤時間は無効 ：カスタムバリデートを定義

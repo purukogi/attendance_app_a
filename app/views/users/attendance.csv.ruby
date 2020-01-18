@@ -14,7 +14,16 @@ require 'csv'
       attendance.finished_at,
       attendance.note
     ]
-
+  elsif attendance.started_at.present? && attendance.finished_at.present? && attendance.change_authorizer == "上長A" && attendance.application_edit_state == "なし　"
+    column_values = [
+    attendance.worked_on.strftime("%m/%d"),
+    "上長Ａに申請中"
+    ]
+  elsif attendance.started_at.present? && attendance.finished_at.present? && attendance.change_authorizer == "上長B" && attendance.application_edit_state == "なし　"
+    column_values = [
+    attendance.worked_on.strftime("%m/%d"),
+    "上長Ｂに申請中"
+    ]
   else
     column_values = [
       attendance.worked_on.strftime("%m/%d"),

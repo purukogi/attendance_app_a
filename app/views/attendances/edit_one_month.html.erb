@@ -13,7 +13,7 @@
           <th>在社時間</th>
           <th>備考</th>
           <th>指示者確認㊞</th>
-          <th>承認ステータス</th>
+          <!-- <th>承認ステータス</th> -->
         </tr>
       </thead>
       <tbody>
@@ -59,7 +59,7 @@
                   <%= af.select :change_authorizer, Attendance.change_authorizers.keys.to_a, { include_blank: true }, class: "form-control" %>
                 <% end %>
               </td>
-              <td><%= af.select :application_edit_state, Attendance.application_edit_states.keys.to_a, { include_blank: false }, class: "form-control" %></td>
+              
             </tr>
             
           <% end %>
