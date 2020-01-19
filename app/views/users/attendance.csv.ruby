@@ -16,13 +16,11 @@ require 'csv'
     ]
   elsif attendance.started_at.present? && attendance.finished_at.present? && attendance.change_authorizer == "上長A" && attendance.application_edit_state == "なし　"
     column_values = [
-    attendance.worked_on.strftime("%m/%d"),
-    "上長Ａに申請中"
+    attendance.worked_on.strftime("%m/%d")
     ]
   elsif attendance.started_at.present? && attendance.finished_at.present? && attendance.change_authorizer == "上長B" && attendance.application_edit_state == "なし　"
     column_values = [
-    attendance.worked_on.strftime("%m/%d"),
-    "上長Ｂに申請中"
+    attendance.worked_on.strftime("%m/%d")
     ]
   else
     column_values = [
